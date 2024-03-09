@@ -82,7 +82,7 @@ export default function Card({ id, list, name }) {
       <section>
         <NameText>{actualName}</NameText>
         <TokensListed>
-          {list?.tokens?.length > 0 ? `${list.tokens.length} tokens` : list === null ? 'Error' : 'Loading...'}
+          {list?.tokens?.length > 0 ? `${list.tokens.length} Attestation` : list === null ? 'Error' : 'Loading...'}
         </TokensListed>
       </section>
     </StyledCard>

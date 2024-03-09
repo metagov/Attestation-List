@@ -195,18 +195,18 @@ export default function Tokens({ tokens }) {
   return (
     <ListWrapper>
       <ListHeader className="flex-between" style>
-        <Title>List Tokens</Title>
+        <Title>List Attestations</Title>
         <Search handleChange={handleChange} value={value} setValue={setValue} />
       </ListHeader>
 
       <TokenWrapper>
         <ListTitle>
-          <p className="hide-small">Name</p>
-          <p className="hide-small">Chain</p>
-          <p className="hide-small">Symbol</p>
-          <p className="hide-small">Tags</p>
+          <p className="hide-small">UID</p>
+          <p className="hide-small">Schema</p>
+          <p className="hide-small">From</p>
+          <p className="hide-small">To</p>
           <p className="hide-small" style={{ textAlign: 'right' }}>
-            Address
+            Age
           </p>
         </ListTitle>
 
