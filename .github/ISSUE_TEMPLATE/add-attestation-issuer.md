@@ -7,8 +7,10 @@ assignees: ''
 
 ---
 
-**Please provide the following information**
-List url must be HTTPS, IPFS or ENS.
+**Please provide the following information in JSON**
+It should adhere to this [Schema](https://raw.githubusercontent.com/metagov/Attestation-List/master/attestationIssuerList.json)
+Here's an [example](https://raw.githubusercontent.com/metagov/Attestation-List/master/example.json)
+Attestation List url must be HTTPS or IPFS.
 
 Issuer URL: 
 Issuer Name: 
@@ -22,3 +24,5 @@ EAS Schema ID:
 Schema Description:
 Network ID:
 EAS Explorer Link:
+
+Attestation List URI:
