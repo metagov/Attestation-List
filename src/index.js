@@ -11,7 +11,7 @@ ReactDOM.render(
   <React.StrictMode>
     <Router>
       <Route exact path="/" component={Home} />
-      <Route path="/token-list" component={List} />
+      <Route path="/schemas" component={List} />
       <Route path="/why" component={Why} />
     </Router>
   </React.StrictMode>,
