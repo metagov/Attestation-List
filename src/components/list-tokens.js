@@ -53,18 +53,18 @@ const AttestationList = ({ attestations }) => {
         renderResults={(results) => (
           results.length === 0 ? <div>No results found!</div> : results.map((attestation, index) => (
             <AttestationItem key={index}>
-              {attestation.schemas && attestation.schemas.map((schema) => (
+              {/* Displaying attestation details based on available data */}
+              <Detail>Network ID: {attestation.networkID}</Detail>
+              <Detail>Description: {attestation.schemaDescription}</Detail>
+              <Detail>Schema UID: {attestation.schemaUID}</Detail>
+              {attestation.schemaDetails && (
                 <SchemaItem>
-                  <Detail><strong>Description:</strong> {schema.schemaDescription}</Detail>
-                  <Detail><strong>Creator:</strong> {schema.schemaDetails.creator}</Detail>
-                  <Detail><strong>Revocable:</strong> {schema.schemaDetails.revocable ? 'Yes' : 'No'}</Detail>
-                  <Detail><strong>Number of Attestations:</strong> {schema.schemaDetails.attestationsCount}</Detail>
-                  <Detail><strong>Network ID:</strong> {schema.networkID}</Detail>
-                  <Detail><strong>Schema ID:</strong> {schema.schemaDetails.id}</Detail>
-                  <Detail><strong>Last Updated:</strong> {schema.schemaDetails.time}</Detail>
-                  <Detail><strong>Transaction ID:</strong> {schema.schemaDetails.txid}</Detail>
+                  <Detail>Creator: {attestation.schemaDetails.creator}</Detail>
+                  <Detail>ID: {attestation.schemaDetails.id}</Detail>
+                  <Detail>Resolver: {attestation.schemaDetails.resolver}</Detail>
+                  <Detail>Revocable: {attestation.schemaDetails.revocable ? 'Yes' : 'No'}</Detail>
                 </SchemaItem>
-              ))}
+              )}
             </AttestationItem>
           ))
         )}
