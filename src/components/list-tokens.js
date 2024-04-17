@@ -19,11 +19,14 @@ const AttestationItem = styled.div`
   padding: 10px;
   border-radius: 8px;
   margin-bottom: 10px;
+  margin-top: 20px;
+
 `;
 
 const SchemaItem = styled.div`
   padding: 10px;
   border-top: 1px solid #eee;
+  margin-top: 5px;
   &:first-child {
     border-top: none;
   }
@@ -33,6 +36,26 @@ const Detail = styled.div`
   margin-bottom: 5px;
   font-size: 14px;
 `;
+
+// Helper function to determine and render networkID
+const renderNetworkID = (networkID) => {
+  if (typeof networkID === 'object' && networkID.hex && networkID.type) {
+    try {
+      const decimalValue = parseInt(networkID.hex, 16);
+      if (!isNaN(decimalValue)) {
+        return ` ${decimalValue}`;
+      } else {
+        return `${networkID.hex} (Invalid hex)`;
+      }
+    } catch (e) {
+      console.error('Error converting hex to decimal:', e);
+      return `${networkID.hex} (Error)`;
+    }
+  } else {
+    return networkID;
+  }
+};
+
 
 const AttestationList = ({ attestations }) => {
   const [searchValue, setSearchValue] = useState('');
@@ -54,7 +77,7 @@ const AttestationList = ({ attestations }) => {
           results.length === 0 ? <div>No results found!</div> : results.map((attestation, index) => (
             <AttestationItem key={index}>
               {/* Displaying attestation details based on available data */}
-              <Detail>Network ID: {attestation.networkID}</Detail>
+              <Detail>Network ID: {renderNetworkID(attestation.networkID)}</Detail>
               <Detail>Description: {attestation.schemaDescription}</Detail>
               <Detail>Schema UID: {attestation.schemaUID}</Detail>
               {attestation.schemaDetails && (
