@@ -1,8 +1,0 @@
-Progress: resolved 0, reused 1, downloaded 0, added 0
- ERR_PNPM_FETCH_404  GET https://registry.npmjs.org/23.2.3: Not Found - 404
-
-This error happened while installing a direct dependency of /home/torch/NEWWW/AttestSchemaWebsite
-
-23.2.3 is not in the npm registry, or you have no permission to fetch it. Did you mean 2?
-
-No authorization header was set for the request.
