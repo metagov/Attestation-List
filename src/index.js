@@ -6,9 +6,11 @@ import Home from './pages/home'
 import Why from './pages/why'
 import * as serviceWorker from './serviceWorker'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
+import { Web3Provider } from './utils/web3wallet'
 
 ReactDOM.render(
   <React.StrictMode>
+    <Web3Provider>
      <Router>
       <Routes> 
         <Route exact path="/" element={<Home />} />
@@ -16,6 +18,7 @@ ReactDOM.render(
         <Route path="/why" element={<Why />} />
       </Routes>
     </Router>
+    </Web3Provider>
   </React.StrictMode>,
   document.getElementById('root')
 )

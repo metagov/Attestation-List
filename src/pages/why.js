@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import Header from '../components/header'
+import { ConnectKitButton } from "connectkit"; 
 
 import '../index.css'
 
@@ -16,6 +17,7 @@ function Home() {
           <section className="hero">
             <small style={{ marginTop: '4rem', marginBottom: '1rem' }}>A DAOstar project</small>
             <p className="title">Why DAO Attestation list?</p>
+            <ConnectKitButton/>
 
             <p className="description" id="why-lists">
               DAO Attestation Lists aim to solve the problem of the Ethereum community creating, discovering and maintaining lists
