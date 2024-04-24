@@ -4,6 +4,7 @@ import './index.css'
 import List from './pages/list'
 import Home from './pages/home'
 import Why from './pages/why'
+import { Form } from 'react-hook-form'
 import * as serviceWorker from './serviceWorker'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 
@@ -13,6 +14,7 @@ ReactDOM.render(
       <Route exact path="/" component={Home} />
       <Route path="/schemas" component={List} />
       <Route path="/why" component={Why} />
+      <Route path="/subimit" component={Form} />
     </Router>
   </React.StrictMode>,
   document.getElementById('root')

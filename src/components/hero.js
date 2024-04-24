@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import { Link } from 'react-router-dom';
 
 const Hero = styled.section`
   display: flex;
@@ -86,13 +87,13 @@ export default function Header() {
       <HoverLink target="_blank" rel="noopener noreferrer" href="https://daostar.com/daoip6">
         {'->'} Why Attestation List?
       </HoverLink>
-      <HoverLink
+      <Link
         target="_blank"
         rel="noopener noreferrer"
-        href="https://github.com/Uniswap/token-lists#authoring-token-lists"
+        to="/submit"
       >
         {'->'} Make your own
-      </HoverLink>
+      </Link>
       <HoverLink target="_blank" rel="noopener noreferrer" href="https://discord.com/invite/PdrPkEZVFk">
         {'->'} Community
       </HoverLink>
