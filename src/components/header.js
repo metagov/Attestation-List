@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 import styled from 'styled-components'
 
 import logo from '../logo/color.png'
@@ -81,14 +81,14 @@ export default function Header({ back }) {
         >
           Why lists?
         </a>
-        <a
+        <NavLink
           className="hide-small"
           target="_blank"
           rel="noopener noreferrer"
-          href="https://github.com/Uniswap/token-lists#authoring-token-lists"
+          to="/submit"
         >
           Make a list
-        </a>
+        </NavLink>
 
         <ButtonLink
           className="button"

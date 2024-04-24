@@ -7,6 +7,7 @@ import Why from './pages/why'
 import * as serviceWorker from './serviceWorker'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import { Web3Provider } from './utils/web3wallet'
+import SubmitForm from './pages/form'
 
 ReactDOM.render(
   <React.StrictMode>
@@ -16,6 +17,8 @@ ReactDOM.render(
         <Route exact path="/" element={<Home />} />
         <Route path="/schemas" element={<List />} />
         <Route path="/why" element={<Why />} />
+        <Route path="/submit" element={<SubmitForm />} />
+
       </Routes>
     </Router>
     </Web3Provider>
