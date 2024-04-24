@@ -29,7 +29,8 @@
     "build": "NODE_OPTIONS='--openssl-legacy-provider' react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "debug": "NODE_OPTIONS='--openssl-legacy-provider' react-scripts start -p 5000"
+    "debug": "NODE_OPTIONS='--openssl-legacy-provider' react-scripts start -p 5000",
+    "clean": "rm -rf node_modules package-lock.json pnpm-lock.yaml build"
   },
   "eslintConfig": {
     "extends": "react-app"
