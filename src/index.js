@@ -4,10 +4,10 @@ import './index.css'
 import List from './pages/list'
 import Home from './pages/home'
 import Why from './pages/why'
-import * as serviceWorker from './serviceWorker'
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
-import { Web3Provider } from './utils/web3wallet'
 import SubmitForm from './pages/form'
+import * as serviceWorker from './serviceWorker'
+import { HashRouter as Router, Route, Routes } from 'react-router-dom';
+import { Web3Provider } from './utils/web3wallet'
 
 ReactDOM.render(
     <Web3Provider>
@@ -15,8 +15,8 @@ ReactDOM.render(
       <Routes> 
         <Route exact path="/" element={<Home />} />
         <Route path="/schemas" element={<List />} />
+        <Route path="/submit" element={<SubmitForm />} />
         <Route path="/why" element={<Why />} />
-        <Route exact path="/submit" element={<SubmitForm />} />
       </Routes>
     </Router>
     </Web3Provider>,
