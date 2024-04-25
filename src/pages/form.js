@@ -10,32 +10,47 @@ import { useAccount, useNetwork } from "wagmi";
 import { ethers } from "ethers";
 
 const Content = styled.section`
-  display: grid;
-  grid-template-columns: 300px 800px;
-  grid-gap: 48px;
-  position: relative;
+  display: flex; // Use flexbox instead of grid
+  justify-content: center; // Horizontally center the content
+  align-items: center; // Vertically center the content (if needed)
+  max-width: 800px; // Max width can be the same as your original grid's main column
+  width: 100%; // Make sure it takes up the full width
+  margin: 0 auto; // Center the entire container within its parent
+  padding: 0 1.5rem; // Maintain padding on the sides
   box-sizing: border-box;
+  min-height: 100vh; // Optional: makes the container fill the viewport height
 
   @media screen and (max-width: 960px) {
-    grid-template-columns: 1fr;
-    grid-gap: 24px;
-    padding: 0 1.5rem;
+    max-width: none; // On smaller screens, allow it to take the full width
+    padding: 0 1.5rem; // Adjust padding as necessary for smaller screens
   }
 `;
 
+const WalletContainer = styled.div`
+  display: flex;
+  justify-content: flex-end; // Aligns the button to the end of the container
+  padding: 1em; // Add padding as necessary
+`;
 const Container = styled.div`
-  width: 50vw; 
-  min-width: 300px; 
-  margin: 50px auto;  
+  width: 50vw;  // Half of the viewport width for larger screens
+  min-width: 300px;  // Minimum width for smaller screens
+  margin: 50px auto;  // Top and bottom margin with auto left and right margin for centering
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
   background-color: #fff;
+  display: flex;  // Flex container to center the content
+  flex-direction: column;  // Stack children vertically
+  align-self: center;  // Center children horizontally
+  justify-content: center;  // Center children vertically, if needed
 
   @media (max-width: 768px) {
-    width: 90vw;  =
+    width: 90vw;  // A larger percentage of the viewport width for smaller screens
+    margin-top: 20px;  // Less vertical space on smaller screens
+    margin-bottom: 20px;
   }
 `;
+
 
 
 const Title = styled.h1`
@@ -49,7 +64,7 @@ const Form = styled.form`
 `;
 
 const Input = styled.input`
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   padding: 10px;
   font-size: 16px;
   border: 1px solid #ccc;
@@ -57,7 +72,7 @@ const Input = styled.input`
 `;
 
 const TextArea = styled.textarea`
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   padding: 10px;
   font-size: 16px;
   border: 1px solid #ccc;
@@ -69,14 +84,14 @@ const Button = styled.button`
   padding: 10px 20px;
   font-size: 16px;
   color: white;
-  background-color: #007BFF;
+  background-color: #000000;
   border: none;
   border-radius: 4px;
   cursor: pointer;
   transition: background-color 0.3s;
 
   &:hover {
-    background-color: #0056b3;
+    background-color: #808080;
   }
 `;
 
@@ -87,15 +102,15 @@ const RemoveButton = styled.button`
   padding: 10px 20px;
   font-size: 16px;
   color: white;
-  background-color: #007BFF;
+  background-color: #000000;
   border: none;
   border-radius: 4px;
   cursor: pointer;
   transition: background-color 0.3s;
   &:hover {
-    background-color: #0056b3;
+    background-color: #808080;
   }
-  margin-bottom: 10px;
+  margin-bottom: 8px;
 `;
 
 const AddButton = styled.button`
@@ -103,15 +118,15 @@ const AddButton = styled.button`
   padding: 10px 20px;
   font-size: 16px;
   color: white;
-  background-color: #007BFF;
+  background-color: #000000;
   border: none;
   border-radius: 4px;
   cursor: pointer;
   transition: background-color 0.3s;
   &:hover {
-    background-color: #0056b3;
+    background-color: #808080;
   }
-  margin-bottom: 10px;
+  margin-bottom: 8px;
 `;
 
 const FieldGroup = styled.div`
@@ -130,6 +145,7 @@ const Label = styled.label`
   color: #6c757d; // A common shade of gray
   font-weight: bold; // Makes the text bold
   margin-bottom: 8px;
+  margin-top: 15px;
   display: block; // Ensure the label appears above the input/textarea
 `;
 
@@ -142,7 +158,7 @@ const AdvancedOptionsContainer = styled.section`
 `;
 
 const ToggleButton = styled.button`
-  background-color: #007bff;
+  background-color: #000000;
   color: white;
   border: none;
   border-radius: 20px;
@@ -155,7 +171,7 @@ const ToggleButton = styled.button`
   }
 
   &.active {
-    background-color: #0056b3;
+    background-color: #808080;
   }
 `;
 
@@ -251,7 +267,8 @@ function SubmitForm() {
     <Content>
     <Container>
       <Title>Attest to DAO Schema Registry</Title>
-      <ConnectKitButton />
+      <WalletContainer> <ConnectKitButton /> </WalletContainer>
+      
       <Form onSubmit={handleSubmit(onSubmit)}>
 
         
@@ -342,13 +359,13 @@ function SubmitForm() {
         {/* Advanced Options Section */}
         {showAdvanced && (
           <AdvancedOptionsContainer>
-            <Label>EXPIRATION TIME (OPTIONAL)</Label>
-            <Input {...register("expirationTime")} placeholder="Set the expiration time of the attestation" />
+            <Label>Expiration Time (Optional)</Label>
+            <Input {...register("expirationTime")} placeholder="Expiration time" />
 
-            <Label>REFERENCED ATTESTATION (OPTIONAL)</Label>
+            <Label>Referenced Attestation (Optional)</Label>
             <Input {...register("referencedAttestation")} placeholder="Referenced attestation UID" />
 
-            <Label>IS REVOCABLE</Label>
+            <Label>Is Revocable?</Label>
             <div>
               <ToggleButton 
                 className={isRevocable ? 'active' : ''} 
@@ -366,7 +383,7 @@ function SubmitForm() {
           </AdvancedOptionsContainer>
         )}
 
-        <Button type="submit" style={{marginTop: "10px"}}>Submit</Button>
+        <Button type="submit" style={{marginTop: "10px", backgroundColor: "#232b2b"}}>Submit</Button>
       </Form>
     </Container>
     </Content>
