@@ -230,12 +230,16 @@ function SubmitForm() {
         },
       });
 
+
+    console.log("Form Submitted")
     console.log(encodedData);
-    alert(JSON.stringify(data, null, 2));
 
     const newAttestationUID = await tx.wait();
-    alert("New attestation UID:", newAttestationUID);
-    console.log("New attestation UID:", newAttestationUID);
+    if (newAttestationUID !== ''){
+        alert("New attestation UID Created:", newAttestationUID);
+        console.log("New attestation UID:", newAttestationUID);
+    }
+       
   };
 
 
@@ -362,7 +366,7 @@ function SubmitForm() {
           </AdvancedOptionsContainer>
         )}
 
-        <Button type="submit">Submit</Button>
+        <Button type="submit" style={{marginTop: "10px"}}>Submit</Button>
       </Form>
     </Container>
     </Content>
