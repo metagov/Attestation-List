@@ -10,7 +10,6 @@ import { Web3Provider } from './utils/web3wallet'
 import SubmitForm from './pages/form'
 
 ReactDOM.render(
-  <React.StrictMode>
     <Web3Provider>
      <Router>
       <Routes> 
@@ -21,8 +20,7 @@ ReactDOM.render(
 
       </Routes>
     </Router>
-    </Web3Provider>
-  </React.StrictMode>,
+    </Web3Provider>,
   document.getElementById('root')
 )
 
