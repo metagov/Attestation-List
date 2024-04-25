@@ -1,71 +1,61 @@
-import { providers } from "ethers";
-import { useEffect, useState } from "react";
-import { usePublicClient, useWalletClient } from "wagmi";
+import { FallbackProvider, JsonRpcProvider, BrowserProvider} from 'ethers';
+import { useEffect, useState, useMemo } from 'react';
+import { useWalletClient, usePublicClient } from 'wagmi';
 
+// Convert public client to a Provider
 export function publicClientToProvider(publicClient) {
   const { chain, transport } = publicClient;
   const network = {
     chainId: chain.id,
     name: chain.name,
-    ensAddress: chain.contracts?.ensRegistry?.address
+    ensAddress: chain.contracts?.ensRegistry?.address,
   };
-  if (transport.type === "fallback")
-    return new providers.FallbackProvider(
-      transport.transports.map(
-        ({ value }) => new providers.JsonRpcProvider(value?.url, network)
-      )
+  if (transport.type === 'fallback') {
+    const providers = transport.transports.map(
+      ({ value }) => new JsonRpcProvider(value?.url, network)
     );
-  return new providers.JsonRpcProvider(transport.url, network);
+    if (providers.length === 1) return providers[0];
+    return new FallbackProvider(providers);
+  }
+  return new JsonRpcProvider(transport.url, network);
 }
 
+// Convert wallet client to a Signer
 export function walletClientToSigner(walletClient) {
   const { account, chain, transport } = walletClient;
   const network = {
     chainId: chain.id,
     name: chain.name,
-    ensAddress: chain.contracts?.ensRegistry?.address
+    ensAddress: chain.contracts?.ensRegistry?.address,
   };
-  const provider = new providers.Web3Provider(transport, network);
+  const provider = new BrowserProvider(transport, network)
   const signer = provider.getSigner(account.address);
 
   return signer;
 }
 
-
+// Hook to get Signer from wallet client
 export function useSigner() {
   const { data: walletClient } = useWalletClient();
 
-  const [signer, setSigner] = useState(undefined);
-  useEffect(() => {
-    async function getSigner() {
-      if (!walletClient) return;
+  const signer = useMemo(() => {
+    if (!walletClient) return undefined;
 
-      const tmpSigner = walletClientToSigner(walletClient);
-
-      setSigner(tmpSigner);
-    }
-
-    getSigner();
-
+    return walletClientToSigner(walletClient);
   }, [walletClient]);
+
   return signer;
 }
 
+// Hook to get Provider from public client
 export function useProvider() {
   const publicClient = usePublicClient();
 
-  const [provider, setProvider] = useState(undefined);
-  useEffect(() => {
-    async function getSigner() {
-      if (!publicClient) return;
+  const provider = useMemo(() => {
+    if (!publicClient) return undefined;
 
-      const tmpProvider = publicClientToProvider(publicClient);
-
-      setProvider(tmpProvider);
-    }
-
-    getSigner();
-
+    return publicClientToProvider(publicClient);
   }, [publicClient]);
+
   return provider;
 }
