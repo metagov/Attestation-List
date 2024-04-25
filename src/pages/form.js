@@ -4,7 +4,10 @@ import { useForm, useFieldArray } from 'react-hook-form';
 import Header from '../components/header'
 import '../index.css';
 import { ConnectKitButton } from "connectkit"; 
-
+import { eas, provider, schemaEncoder } from '../utils/initeas';
+import { useSigner } from '../utils/wagmiutils';
+import { useAccount, useNetwork } from "wagmi";
+import { ethers } from "ethers";
 
 const Content = styled.section`
   display: grid;
@@ -157,22 +160,29 @@ const ToggleButton = styled.button`
 `;
 
 function SubmitForm() {
-  const { register, handleSubmit, formState: { errors }, control } = useForm({
-    defaultValues: {
-      schemaUids: [{ value: "" }],
-      schemaDescriptions: [{ value: "" }],
-      networkIds: [{ value: "" }],
-    }
-  });
+
+    const { address, isConnected, chain } = useAccount();
+    const signer = useSigner();
+
+    
+
+    const { register, handleSubmit, formState: { errors }, control, watch } = useForm({
+        defaultValues: {
+          schemaUids: [{ value: "" }],
+          schemaDescriptions: [{ value: "" }],
+          networkIds: [{ value: "" }],
+          issuerName: "",
+          issuerDescription: "",
+          logo: "",
+          apiDocsUri: "",
+        }
+      });
+    
   useEffect(() => {
     window.scrollTo(0, 0)
   }, [])
   const [showAdvanced, setShowAdvanced] = useState(false);
   const [isRevocable, setIsRevocable] = useState(false);
-  const onSubmit = data => {
-    alert(JSON.stringify(data, null, 2));
-    console.log(data)
-  };
 
   const { fields: schemaUidFields, append: appendSchemaUid, remove: removeSchemaUid } = useFieldArray({
     control,
@@ -189,11 +199,46 @@ function SubmitForm() {
     name: 'networkIds'
   });
 
-  const handleAddFields = () => {
-    appendSchemaUid({ value: "" });
-    appendSchemaDesc({ value: "" });
-    appendNetworkId({ value: "" });
+
+
+  const onSubmit = async data => {
+
+    if (!isConnected || !chain ) {
+        alert('Please connect your wallet to make an attestation')
+
+    }
+    eas.connect(signer);
+
+    const encodedData = schemaEncoder.encodeData([
+      { name: "schemaUID", value: data.schemaUids.map(uid => uid.value), type: "bytes32[]" },
+      { name: "schemaDescription", value: data.schemaDescriptions.map(desc => desc.value), type: "string[]" },
+      { name: "networkID", value: data.networkIds.map(id => parseInt(id.value)), type: "uint256[]" },
+      { name: "issuerName", value: data.issuerName, type: "string" },
+      { name: "issuerDescription", value: data.issuerDescription, type: "string" },
+      { name: "logo", value: data.logo, type: "string" },
+      { name: "apiDocsURI", value: data.apiDocsUri, type: "string" },
+    ]);
+
+    const schemaUID = "0x25eb07102ee3f4f86cd0b0c4393457965b742b8acc94aa3ddbf2bc3f62ed1381";
+    const tx = await eas.attest({
+        schema: schemaUID,
+        data: {
+          recipient: data.recipient? data.recipient : address , // default is connected wallet address
+          expirationTime: data.expirationTime? data.expirationTime : 0,
+          revocable: isRevocable? isRevocable : true, // Be aware that if your schema is not revocable, this MUST be false
+          data: encodedData,
+        },
+      });
+
+    console.log(encodedData);
+    alert(JSON.stringify(data, null, 2));
+
+    const newAttestationUID = await tx.wait();
+    alert("New attestation UID:", newAttestationUID);
+    console.log("New attestation UID:", newAttestationUID);
   };
+
+
 
 
   return (
