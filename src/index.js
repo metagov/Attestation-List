@@ -16,7 +16,7 @@ ReactDOM.render(
         <Route exact path="/" element={<Home />} />
         <Route path="/schemas" element={<List />} />
         <Route path="/why" element={<Why />} />
-        <Route path="/submit" element={<SubmitForm />} />
+        <Route exact path="/submit" element={<SubmitForm />} />
       </Routes>
     </Router>
     </Web3Provider>,
