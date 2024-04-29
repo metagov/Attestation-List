@@ -5,7 +5,7 @@ import Header from '../components/header'
 import '../index.css';
 import { ConnectKitButton } from "connectkit"; 
 import { eas, provider, schemaEncoder } from '../utils/initeas';
-import { useSigner } from '../utils/wagmiutils';
+import { useEthersSigner, useSigner } from '../utils/wagmiutils';
 import { useAccount, useNetwork } from "wagmi";
 import { ethers } from "ethers";
 
@@ -178,7 +178,7 @@ const ToggleButton = styled.button`
 function SubmitForm() {
 
     const { address, isConnected, chain } = useAccount();
-    const signer = useSigner();
+    const signer = useEthersSigner();
 
     
 
