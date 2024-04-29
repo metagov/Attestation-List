@@ -90,7 +90,7 @@ export default function Header() {
       <Link
         target="_blank"
         rel="noopener noreferrer"
-        to="/submit"
+        to="/attest"
       >
         {'->'} Make your own
       </Link>

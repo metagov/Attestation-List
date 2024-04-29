@@ -85,7 +85,8 @@ export default function Header({ back }) {
           className="hide-small"
           target="_blank"
           rel="noopener noreferrer"
-          to="/submit"
+          to="/attest
+          "
         >
           Make a list
         </NavLink>
