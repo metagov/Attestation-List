@@ -987,6 +987,11 @@ select {
   padding-left: 0.75rem;
 }
 
+.text-2xl {
+  font-size: 1.5rem;
+  line-height: 2rem;
+}
+
 .text-base {
   font-size: 1rem;
   line-height: 1.5rem;
@@ -1155,6 +1160,10 @@ select {
 
   .sm\:col-span-4 {
     grid-column: span 4 / span 4;
+  }
+
+  .sm\:mr-2 {
+    margin-right: 0.5rem;
   }
 
   .sm\:max-w-md {

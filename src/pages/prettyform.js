@@ -124,7 +124,7 @@ export default function PrettyForm() {
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div className="space-y-12 mt-28 px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12">
                     <div className="border-b border-gray-900/10 pb-12">
-                        <h2 className="text-base font-semibold leading-7 text-gray-900">Register your DAO Schema</h2>
+                        <h1 className="text-2xl font-semibold leading-7 text-gray-900 ">Register your DAO Schema</h1>
                         <p className="mt-1 text-sm leading-6 text-gray-600">
                             Connect your wallet to get started.
                             All your DAO Schema registrations will be displayed on the explorer under Issuer profile.
@@ -139,7 +139,7 @@ export default function PrettyForm() {
                         <h2 className="text-base font-semibold leading-7 text-gray-900">Add your DAO Schemas</h2>
                         <p className="mt-1 text-sm leading-6 text-gray-600">Provide Schema UID, Description and the coresponding Network ID</p>
 
-                        <div className="mt-10 ">
+                        <div className="mt-8">
                             {networkIdFields.map((item, index) => (
 
                                 <div key={item.id} className="grid grid-cols-1 gap-y-8">
@@ -433,17 +433,18 @@ export default function PrettyForm() {
 
                         </div>)}
                     </div>
+                    <div className=" flex items-center justify-end gap-x-6 mb-8 sm:mr-2">
+                        <button
+                            type="submit"
+                            className="rounded-md bg-black mb-8 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-slate-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black-600"
+                        >
+                            Submit
+                        </button>
+                    </div>
 
                 </div>
 
-                <div className="mt-6 flex items-center justify-end gap-x-6 mb-8 sm:mr-2">
-                    <button
-                        type="submit"
-                        className="rounded-md bg-black px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-slate-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black-600"
-                    >
-                        Submit
-                    </button>
-                </div>
+
             </form>
         </div>
     )
