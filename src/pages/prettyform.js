@@ -36,7 +36,7 @@ export default function PrettyForm() {
             networkIds: [{ value: "" }],
             issuerName: "",
             issuerDescription: "",
-            logo: "",
+            logoUri: "https://optimism.easscan.org/logo2.png?v=3",
             apiDocsUri: "",
         }
     });
@@ -268,7 +268,8 @@ export default function PrettyForm() {
                                             name="logoUri"
                                             id="logoUri"
                                             {...register("logoUri", {
-                                                required: true, pattern: {
+                                                
+                                                pattern: {
                                                     value: /^(https?|chrome):\/\/[^\s$.?#].[^\s]*$/,
                                                     message: 'Invalid URI' // custom message
                                                 }
