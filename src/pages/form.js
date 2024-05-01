@@ -1,15 +1,15 @@
-import React, { useEffect, useState} from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components';
 import { useForm, useFieldArray } from 'react-hook-form';
 import Header from '../components/header'
 import '../index.css';
-import { ConnectKitButton } from "connectkit"; 
+import { ConnectKitButton } from "connectkit";
 import { eas, provider, schemaEncoder } from '../utils/initeas';
 import { useEthersSigner, useSigner } from '../utils/wagmiutils';
 import { useAccount, useNetwork } from "wagmi";
 import { ethers } from "ethers";
 
-const Content = styled.section`
+export const Content = styled.section`
   display: flex; // Use flexbox instead of grid
   justify-content: center; // Horizontally center the content
   align-items: center; // Vertically center the content (if needed)
@@ -177,23 +177,20 @@ const ToggleButton = styled.button`
 
 function SubmitForm() {
 
-    const { address, isConnected, chain } = useAccount();
-    const signer = useEthersSigner();
+  const { address, isConnected, chain } = useAccount();
+  const signer = useEthersSigner();
+  const { register, handleSubmit, formState: { errors }, control, watch } = useForm({
+    defaultValues: {
+      schemaUids: [{ value: "" }],
+      schemaDescriptions: [{ value: "" }],
+      networkIds: [{ value: "" }],
+      issuerName: "",
+      issuerDescription: "",
+      logo: "",
+      apiDocsUri: "",
+    }
+  });
 
-    
-
-    const { register, handleSubmit, formState: { errors }, control, watch } = useForm({
-        defaultValues: {
-          schemaUids: [{ value: "" }],
-          schemaDescriptions: [{ value: "" }],
-          networkIds: [{ value: "" }],
-          issuerName: "",
-          issuerDescription: "",
-          logo: "",
-          apiDocsUri: "",
-        }
-      });
-    
   useEffect(() => {
     window.scrollTo(0, 0)
   }, [])
@@ -219,8 +216,8 @@ function SubmitForm() {
 
   const onSubmit = async data => {
 
-    if (!isConnected || !chain ) {
-        alert('Please connect your wallet to make an attestation')
+    if (!isConnected || !chain) {
+      alert('Please connect your wallet to make an attestation')
 
     }
     eas.connect(signer);
@@ -237,25 +234,25 @@ function SubmitForm() {
 
     const schemaUID = "0x25eb07102ee3f4f86cd0b0c4393457965b742b8acc94aa3ddbf2bc3f62ed1381";
     const tx = await eas.attest({
-        schema: schemaUID,
-        data: {
-          recipient: data.recipient? data.recipient : address , // default is connected wallet address
-          expirationTime: data.expirationTime? data.expirationTime : 0,
-          revocable: isRevocable? isRevocable : true, // Be aware that if your schema is not revocable, this MUST be false
-          data: encodedData,
-        },
-      });
+      schema: schemaUID,
+      data: {
+        recipient: data.recipient ? data.recipient : address, // default is connected wallet address
+        expirationTime: data.expirationTime ? data.expirationTime : 0,
+        revocable: isRevocable ? isRevocable : true, // Be aware that if your schema is not revocable, this MUST be false
+        data: encodedData,
+      },
+    });
 
 
     console.log("Form Submitted")
     console.log(encodedData);
 
     const newAttestationUID = await tx.wait();
-    if (newAttestationUID !== ''){
-        alert("New attestation UID Created:", newAttestationUID);
-        console.log("New attestation UID:", newAttestationUID);
+    if (newAttestationUID !== '') {
+      alert("New attestation UID Created:", newAttestationUID);
+      console.log("New attestation UID:", newAttestationUID);
     }
-       
+
   };
 
 
@@ -263,130 +260,129 @@ function SubmitForm() {
 
   return (
     <div className="app">
-    <Header back={true}/>
-    <Content>
-    <Container>
-      <Title>Attest to DAO Schema Registry</Title>
-      <WalletContainer> <ConnectKitButton /> </WalletContainer>
-      
-      <Form onSubmit={handleSubmit(onSubmit)}>
+      <Header back={true} />
+      <Content>
+        <Container>
+          <Title>Attest to DAO Schema Registry</Title>
 
-        
-        <Label>Recipient</Label>
-        <Input {...register("recipient")} placeholder="Recipient (optional)" />
-        
-        {/* Dynamic Schema UID Fields */}
-        <Label>Schema UID</Label>
-        {schemaUidFields.map((item, index) => (
-          <FieldGroup key={item.id}>
-            <Input 
-              {...register(`schemaUids.${index}.value`)} 
-              placeholder="Schema UID 0x..." 
-            />
-            {index > 0 && (
-              <RemoveButton 
-                type="button" 
-                onClick={() => removeSchemaUid(index)}
-              >
-                Remove
-              </RemoveButton>
+          <Form onSubmit={handleSubmit(onSubmit)}>
+
+
+            <Label>Recipient</Label>
+            <Input {...register("recipient")} placeholder="Recipient (optional)" />
+
+            {/* Dynamic Schema UID Fields */}
+            <Label>Schema UID</Label>
+            {schemaUidFields.map((item, index) => (
+              <FieldGroup key={item.id}>
+                <Input
+                  {...register(`schemaUids.${index}.value`)}
+                  placeholder="Schema UID 0x..."
+                />
+                {index > 0 && (
+                  <RemoveButton
+                    type="button"
+                    onClick={() => removeSchemaUid(index)}
+                  >
+                    Remove
+                  </RemoveButton>
+                )}
+              </FieldGroup>
+            ))}
+            <AddButton
+              type="button"
+              onClick={() => appendSchemaUid({ value: "" })}
+            >
+              Add Schema UID
+            </AddButton>
+
+            {/* Dynamic Schema Description Fields */}
+            <Label>Schema Description</Label>
+            {schemaDescFields.map((item, index) => (
+              <FieldGroup key={item.id}>
+                <TextArea
+                  {...register(`schemaDescriptions.${index}.value`)}
+                  placeholder="Description"
+                />
+                {index > 0 && (
+                  <RemoveButton type="button" onClick={() => removeSchemaDesc(index)}>
+                    Remove
+                  </RemoveButton>
+                )}
+              </FieldGroup>
+            ))}
+            <AddButton type="button" onClick={() => appendSchemaDesc({ value: "" })}>
+              Add Schema Description
+            </AddButton>
+
+            {/* Dynamic Network ID Fields */}
+            <Label>Network ID</Label>
+            {networkIdFields.map((item, index) => (
+              <FieldGroup key={item.id}>
+                <Input
+                  {...register(`networkIds.${index}.value`)}
+                  placeholder="Network ID"
+                />
+                {index > 0 && (
+                  <RemoveButton type="button" onClick={() => removeNetworkId(index)}>
+                    Remove
+                  </RemoveButton>
+                )}
+              </FieldGroup>
+            ))}
+            <AddButton type="button" onClick={() => appendNetworkId({ value: "" })}>
+              Add Network ID
+            </AddButton>
+
+            <Label>Issuer Name</Label>
+            <Input {...register("issuerName", { required: true })} placeholder="Issuer Name" />
+            {errors.issuerName && <Error>Issuer name is required.</Error>}
+
+            <Label>Issuer Description</Label>
+            <TextArea {...register("issuerDescription", { required: true })} placeholder="Issuer Description" />
+
+            <Label>Logo URI</Label>
+            <Input {...register("logo")} placeholder="https://ipfs.io/ipfs/cwpdfdfffff..." />
+
+            <Label>API Docs URI</Label>
+            <Input {...register("apiDocsUri")} placeholder="https://docs.project.com" />
+
+            {/* Advanced Options Toggle */}
+            <Button type="button" onClick={() => setShowAdvanced(!showAdvanced)}>
+              {showAdvanced ? 'Hide Advanced Options' : 'Show Advanced Options'}
+            </Button>
+
+            {/* Advanced Options Section */}
+            {showAdvanced && (
+              <AdvancedOptionsContainer>
+                <Label>Expiration Time (Optional)</Label>
+                <Input {...register("expirationTime")} placeholder="Expiration time" />
+
+                <Label>Referenced Attestation (Optional)</Label>
+                <Input {...register("referencedAttestation")} placeholder="Referenced attestation UID" />
+
+                <Label>Is Revocable?</Label>
+                <div>
+                  <ToggleButton
+                    className={isRevocable ? 'active' : ''}
+                    onClick={() => setIsRevocable(true)}
+                  >
+                    Yes
+                  </ToggleButton>
+                  <ToggleButton
+                    className={!isRevocable ? 'active' : ''}
+                    onClick={() => setIsRevocable(false)}
+                  >
+                    No
+                  </ToggleButton>
+                </div>
+              </AdvancedOptionsContainer>
             )}
-          </FieldGroup>
-        ))}
-        <AddButton 
-          type="button" 
-          onClick={() => appendSchemaUid({ value: "" })}
-        >
-          Add Schema UID
-        </AddButton>
 
-        {/* Dynamic Schema Description Fields */}
-        <Label>Schema Description</Label>
-        {schemaDescFields.map((item, index) => (
-          <FieldGroup key={item.id}>
-            <TextArea 
-              {...register(`schemaDescriptions.${index}.value`)} 
-              placeholder="Description" 
-            />
-            {index > 0 && (
-              <RemoveButton type="button" onClick={() => removeSchemaDesc(index)}>
-                Remove
-              </RemoveButton>
-            )}
-          </FieldGroup>
-        ))}
-        <AddButton type="button" onClick={() => appendSchemaDesc({ value: "" })}>
-          Add Schema Description
-        </AddButton>
-
-        {/* Dynamic Network ID Fields */}
-        <Label>Network ID</Label>
-        {networkIdFields.map((item, index) => (
-          <FieldGroup key={item.id}>
-            <Input 
-              {...register(`networkIds.${index}.value`)} 
-              placeholder="Network ID" 
-            />
-            {index > 0 && (
-              <RemoveButton type="button" onClick={() => removeNetworkId(index)}>
-                Remove
-              </RemoveButton>
-            )}
-          </FieldGroup>
-        ))}
-        <AddButton type="button" onClick={() => appendNetworkId({ value: "" })}>
-          Add Network ID
-        </AddButton>
-
-        <Label>Issuer Name</Label>
-        <Input {...register("issuerName", { required: true })} placeholder="Issuer Name" />
-        {errors.issuerName && <Error>Issuer name is required.</Error>}
-        
-        <Label>Issuer Description</Label>
-        <TextArea {...register("issuerDescription")} placeholder="Issuer Description" />
-        
-        <Label>Logo URI</Label>
-        <Input {...register("logo")} placeholder="https://ipfs.io/ipfs/cwpdfdfffff..." />
-
-        <Label>API Docs URI</Label>
-        <Input {...register("apiDocsUri")} placeholder="https://docs.project.com" />
-
-        {/* Advanced Options Toggle */}
-        <Button type="button" onClick={() => setShowAdvanced(!showAdvanced)}>
-          {showAdvanced ? 'Hide Advanced Options' : 'Show Advanced Options'}
-        </Button>
-
-        {/* Advanced Options Section */}
-        {showAdvanced && (
-          <AdvancedOptionsContainer>
-            <Label>Expiration Time (Optional)</Label>
-            <Input {...register("expirationTime")} placeholder="Expiration time" />
-
-            <Label>Referenced Attestation (Optional)</Label>
-            <Input {...register("referencedAttestation")} placeholder="Referenced attestation UID" />
-
-            <Label>Is Revocable?</Label>
-            <div>
-              <ToggleButton 
-                className={isRevocable ? 'active' : ''} 
-                onClick={() => setIsRevocable(true)}
-              >
-                Yes
-              </ToggleButton>
-              <ToggleButton 
-                className={!isRevocable ? 'active' : ''} 
-                onClick={() => setIsRevocable(false)}
-              >
-                No
-              </ToggleButton>
-            </div>
-          </AdvancedOptionsContainer>
-        )}
-
-        <Button type="submit" style={{marginTop: "10px", backgroundColor: "#232b2b"}}>Submit</Button>
-      </Form>
-    </Container>
-    </Content>
+            <Button type="submit" style={{ marginTop: "10px", backgroundColor: "#232b2b" }}>Submit</Button>
+          </Form>
+        </Container>
+      </Content>
     </div>
   );
 }
