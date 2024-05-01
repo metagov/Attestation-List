@@ -130,6 +130,9 @@ export default function PrettyForm() {
                             All your DAO Schema registrations will be displayed on the explorer under Issuer profile.
                         </p>
                         <div className="flex mt-10">
+                        <p className="mt-1 mr-2 text-sm leading-6 text-gray-600">
+                            You are attesting as
+                        </p>
                             <ConnectKitButton />
                         </div>
 
@@ -137,9 +140,9 @@ export default function PrettyForm() {
 
                     <div className="border-b border-gray-900/10 pb-12">
                         <h2 className="text-base font-semibold leading-7 text-gray-900">Add your DAO Schemas</h2>
-                        <p className="mt-1 text-sm leading-6 text-gray-600">Provide Schema UID, Description and the coresponding Network ID</p>
+                        <p className="mt-1 text-sm leading-6 text-gray-600">Provide Schema UID, Description and the coresponding Network ID for each schema you add.</p>
 
-                        <div className="mt-8">
+                        <div className="mt-5">
                             {networkIdFields.map((item, index) => (
 
                                 <div key={item.id} className="grid grid-cols-1 gap-y-8">
@@ -182,7 +185,7 @@ export default function PrettyForm() {
                                 </div>
                             ))}
 
-                            <div className="mt-6 flex items-center justify-end gap-x-6 mb-8">
+                            <div className="mt-6 flex items-center justify-end gap-x-6 mb-2">
                                 <button type="button" onClick={removeAllFieldsAtIndex}
                                     className="text-sm font-semibold leading-6 text-gray-900">
                                     Remove
@@ -201,10 +204,10 @@ export default function PrettyForm() {
                     <div className="border-b border-gray-900/10 pb-12">
                         <h2 className="text-base font-semibold leading-7 text-gray-900">Issuer Infromation</h2>
                         <p className="mt-1 text-sm leading-6 text-gray-600">
-                            Issuer Infromation is used to create Issuer profile, please keep the Issuer info consistent if you are registering multiple times.
+                            This is used to create Issuer profile, please keep the Issuer info consistent if you are registering multiple times.
                         </p>
 
-                        <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+                        <div className="mt-5 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
 
                             <div className="sm:col-span-3">
                                 <label htmlFor="issuerName" className="block text-sm font-medium leading-6 text-gray-900">
