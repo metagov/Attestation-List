@@ -64,7 +64,7 @@ export default function PrettyForm() {
 
     const onSubmit = async data => {
         console.log(JSON.stringify(data, null, 2));
-        alert(JSON.stringify(data, null, 2)); // Pretty print the JSON data
+        // alert(JSON.stringify(data, null, 2)); // Pretty print the JSON data
 
         if (!isConnected || !chain) {
             alert('Please connect your wallet to make an attestation')
