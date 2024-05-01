@@ -89,7 +89,7 @@ export default function PrettyForm() {
 
         const newAttestationUID = await tx.wait();
         if (newAttestationUID !== '') {
-            alert("New attestation UID Created:", newAttestationUID);
+            alert("Attestation successful!", newAttestationUID);
             console.log("New attestation UID:", newAttestationUID);
         }
 
