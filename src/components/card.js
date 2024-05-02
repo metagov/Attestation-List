@@ -63,7 +63,7 @@ function Card({ data, name }) {
         }}
       />
       <section>
-        <NameText>{name}</NameText>
+        <NameText>{data.name}</NameText>
         <DescriptionText>{data.description}</DescriptionText>
       </section>
     </StyledCard>
