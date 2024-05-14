@@ -21,7 +21,7 @@ export default function Info({ attestation }) {
           <p className="text-gray-800">{attestation.issuerDescription}</p>
         </div>
         <div className="mt-4 text-xs sm:text-sm text-indigo-300 italic">
-            Note: Currently, only the Optimism network is supported.
+            Note: Currently, only Optimism network is supported.
         </div>
       </div>
     </section>
