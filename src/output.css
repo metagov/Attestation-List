@@ -906,6 +906,10 @@ select {
   display: block;
 }
 
+.inline-block {
+  display: inline-block;
+}
+
 .inline {
   display: inline;
 }
@@ -1008,6 +1012,30 @@ select {
 
 .max-w-xs {
   max-width: 20rem;
+}
+
+.max-w-4 {
+  max-width: 1rem;
+}
+
+.max-w-20 {
+  max-width: 5rem;
+}
+
+.max-w-60 {
+  max-width: 15rem;
+}
+
+.max-w-80 {
+  max-width: 20rem;
+}
+
+.max-w-0 {
+  max-width: 0px;
+}
+
+.max-w-\[100px\] {
+  max-width: 100px;
 }
 
 .flex-1 {

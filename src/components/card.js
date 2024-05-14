@@ -2,21 +2,33 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 function formatName(name) {
-  const breakInterval = 5;
-  let chunks = [];
-  if (name) {
-    for (let i = 0; i < name.length; i += breakInterval) {
-      const chunk = name.slice(i, i + breakInterval);
-      chunks.push(<span key={i}>{chunk}&#8203;</span>);
-    }
-    return <>{chunks}</>;
-  } else
-    return <></>;
+  if (!name) return <></>; // Return empty fragment if no name provided
+
+  // Find the first space within the first 8 characters
+  const maxChars = 8;
+  let end = Math.min(name.length, maxChars); // Prevent exceeding the name's length
+  let spaceIndex = name.substring(0, end).indexOf(' ');
+
+  // If a space is found within the limit, adjust the breaking point
+  if (spaceIndex > -1) {
+    end = spaceIndex;
+  }
+
+  // Extract the segment and the rest of the name
+  const segment = name.substring(0, end);
+  const rest = name.substring(end);
+
+  return (
+    <>
+      <span className="inline-block">{segment}&#8203;</span>
+      {/* {rest && <span className="inline-block">{rest}</span>} */}
+    </>
+  );
 }
 
-function Card({ data, name }) {
+
+function Card({ data }) {
   const logoURL = data.logo.startsWith('http') ? data.logo.trim() : `https://via.placeholder.com/150`;
-  console.log(data);
 
   return (
     <Link to={`/schemas?id=${data.id}`} className="block no-underline">
@@ -28,17 +40,17 @@ function Card({ data, name }) {
                 alt={`${data.name} logo`}
                 src={logoURL}
                 onError={(e) => {
-                  e.target.onerror = null; // prevents looping
+                  e.target.onerror = null; // Prevents looping
                   e.target.src = 'https://via.placeholder.com/150';
                 }}
                 className="h-14 w-14"
               />
-              <h5 className="text-lg sm:text-xl font-semibold text-gray-900 break-all">
+              <h5 className="text-xl sm:text-xl font-semibold text-gray-900 max-w-[100px]">
                 {formatName(data.name)}
               </h5>
             </div>
             <div>
-              <span className="rounded bg-indigo-100 px-2 py-1 text-sm sm:text-base font-medium text-indigo-800">
+              <span className="rounded bg-indigo-100 px-2 py-2 text-sm sm:text-base font-medium text-indigo-800">
                 {data.schemas.length} Schemas
               </span>
             </div>
