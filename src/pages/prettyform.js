@@ -119,10 +119,10 @@ export default function PrettyForm() {
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <div className="space-y-12 mt-28 px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12">
                         <div className="border-b border-gray-900/10 pb-12">
-                            <h1 className="text-2xl font-semibold leading-7 text-indigo-600">Register your DAO Schema</h1>
+                            <h1 className="text-2xl font-semibold leading-7 text-indigo-600">Register Your DAO Schemas</h1>
                             <p className="mt-1 text-sm leading-6 text-gray-600">
                                 Connect your wallet to get started.
-                                All your DAO Schema registrations will be displayed on the explorer under Issuer profile.
+                                All your Schema registrations will be displayed on the explorer under Issuer profile.
                             </p>
                             <div className="flex mt-10">
                                 <p className="mt-1 mr-2 text-sm leading-6 text-gray-600">
@@ -134,16 +134,20 @@ export default function PrettyForm() {
                         </div>
 
                         <div className="border-b border-gray-900/10 pb-12">
-                            <h2 className="text-base font-semibold leading-7 text-indigo-600">Add your DAO Schemas</h2>
-                            <p className="mt-1 text-sm leading-6 text-gray-600">Provide Schema UID, Description and the coresponding Network ID for each schema you add.</p>
-                            <p className="mt-1 text-sm leading-6 text-gray-600">You can only attest to the schemas you created and have context set in the mentioned schema, </p>
-
+                            <h2 className="text-base font-semibold leading-7 text-indigo-600">Add Your DAO Schemas</h2>
+                            <p className="mt-1 text-sm leading-6 text-gray-600">
+                                Provide the Schema UID, Description, and the corresponding Network ID for each schema you add.
+                            </p>
+                            <p className="mt-1 text-sm leading-6 text-gray-600">
+                                You can only attest to the schemas you have created and for which you have set the context in the mentioned schema.
+                            </p>
                             <a href="https://optimism.easscan.org/schema/view/0xcc6c9b07bfccd15c8f313d23bf4389fb75629a620c5fa669c898bf1e023f2508"
                                 className="text-indigo-600 text-xs hover:text-indigo-800 visited:text-indigo-600 underline transition-colors duration-300"
                                 target="_blank"
                                 rel="noopener noreferrer">
                                 View Schema
                             </a>
+
                             <div className="mt-5">
                                 {networkIdFields.map((item, index) => (
 
@@ -224,8 +228,9 @@ export default function PrettyForm() {
                         <div className="border-b border-gray-900/10 pb-12">
                             <h2 className="text-base font-semibold leading-7 text-indigo-600">Issuer Infromation</h2>
                             <p className="mt-1 text-sm leading-6 text-gray-600">
-                                This is used to create Issuer profile, please keep the Issuer info consistent if you are registering multiple times.
+                                This is used to create an Issuer profile. Please ensure the Issuer information remains consistent if you are registering multiple times.
                             </p>
+
 
                             <div className="mt-5 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
 
@@ -240,8 +245,12 @@ export default function PrettyForm() {
                                             id="issuerName"
                                             {...register("issuerName", {
                                                 required: true,
+                                                maxLength: {
+                                                    value: 8,
+                                                    message: "Issuer name must be max 8 characters"
+                                                },
                                                 minLength: {
-                                                    value: 3,
+                                                    value: 2,
                                                     message: "Issuer name must be at least 3 characters"
                                                 }
                                             })}
