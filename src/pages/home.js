@@ -1,39 +1,29 @@
-import React, { useEffect } from 'react'
-import styled from 'styled-components'
-import Header from '../components/header'
-import Hero from '../components/hero'
-import AllLists from '../components/allLists'
+import React, { useEffect } from 'react';
+import Header from '../components/header';
+import Hero from '../components/hero';
+import AllLists from '../components/allLists';
 
-import '../index.css'
-
-const Content = styled.div`
-  display: grid;
-  grid-template-columns: 460px 1fr;
-  grid-gap: 48px;
-  position: relative;
-  box-sizing: border-box;
-
-  @media screen and (max-width: 960px) {
-    grid-template-columns: 1fr;
-    padding: 1rem;
-    width: 100%;
-  }
-`
+import '../index.css';
 
 function Home() {
   useEffect(() => {
-    window.scrollTo(0, 0)
-  }, [])
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
-    <div className="app">
-      <Header />
-      <Content>
-        <Hero />
-        <AllLists />
-      </Content>
+<div className="app">
+  <Header />
+  <div className="flex flex-col md:flex-row gap-12 p-4">
+    <div className="md:flex-1 md:max-w-[460px]"> 
+      <Hero />
     </div>
-  )
+    <div className="md:flex-1 w-full">
+      <AllLists />
+    </div>
+  </div>
+</div>
+
+  );
 }
 
-export default Home
+export default Home;

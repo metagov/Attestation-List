@@ -1,114 +1,56 @@
-import React from 'react'
-import { Link, NavLink } from 'react-router-dom'
-import styled from 'styled-components'
-
-import logo from '../logo/color.png'
-
-const StyledHeader = styled.header`
-  display: flex;
-  width: 100%;
-  justify-content: space-between;
-  padding: 1rem;
-  box-sizing: border-box;
-  position: sticky;
-  top: 0;
-  backdrop-filter: blur(20px);
-  z-index: 999;
-  background-color: rgba(255, 255, 255, 0.01);
-  border-bottom: 0.75px solid #13131320;
-
-  a {
-    color: #0f0f0f;
-  }
-  .title {
-    font-size: 1.25rem;
-    font-family: 'MatterSQ-SemiBold';
-  }
-
-  @media screen and (max-width: 640px) {
-    position: relative;
-  }
-`
-
-const Nav = styled.nav`
-  display: inline-flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 1rem;
-  width: fit-content;
-
-  > * {
-    margin-left: 1rem;
-  }
-`
-
-const ButtonLink = styled.a`
-  transition: box-shadow 0.25s ease, translate 0.25s ease;
-  background-color: #010101;
-  border-radius: 8px;
-  width: fit-content;
-  display: flex;
-  align-items: center;
-  padding: 0.5rem 0.65rem;
-  color: white;
-  font-size: 14px;
-  scale: 1;
-  :hover {
-    box-shadow: -6px 6px 0px #d6fdff;
-    translate: 1px -1px;
-  }
-`
+import React from 'react';
+import { Link, NavLink } from 'react-router-dom';
+import logo from '../logo/color.png';
 
 export default function Header({ back }) {
   return (
-    <StyledHeader>
-      <Link style={{ display: 'flex', alignItems: 'center' }} to="/">
-        <img width={32} src={logo} alt="logo" />
-        <span className="title" style={{ marginLeft: '.5rem' }}>
-          DAO Attestation List
-        </span>
+    <header className="flex w-full justify-between p-4 box-border sticky top-0 backdrop-blur-[20px] z-50 bg-white/5 border-b-[0.75px] border-gray-800/20">
+      <Link className="flex items-center" to="/">
+        <img src={logo} alt="logo" className="w-8 h-8" />
+        <span className="ml-2 text-base sm:text-xl font-semibold text-indigo-800">DAO Attestation List</span> 
       </Link>
 
-      <Nav>
-        <a target="_blank" rel="noopener noreferrer" className="hide-small" href="http://community.tokenlists.org/">
+      <nav className="inline-flex flex-wrap items-center gap-2 sm:gap-4">
+        <a
+          className="ml-2 sm:ml-4 hidden sm:inline"
+          target="_blank"
+          rel="noopener noreferrer"
+          href="http://community.tokenlists.org/"
+        >
           Community
         </a>
         <a
+          className="ml-2 sm:ml-4 hidden sm:inline"
           target="_blank"
           rel="noopener noreferrer"
-          className="hide-small"
           href="https://uniswap.org/blog/token-lists/"
         >
           Why lists?
         </a>
         <NavLink
-          className="hide-small"
+          className="ml-2 sm:ml-4 hidden sm:inline"
           target="_blank"
           rel="noopener noreferrer"
-          to="/attest
-          "
+          to="/attest"
         >
           Make a list
         </NavLink>
 
-        <ButtonLink
-          className="button"
+        <a
+          className="ml-2 sm:ml-4 inline-flex items-center p-2 bg-indigo-800 rounded-lg text-white transition-shadow ease-in-out duration-300 hover:shadow-[0_-6px_6px_rgba(255,255,255,0.7)] hover:-translate-y-1"
           target="_blank"
           rel="noopener noreferrer"
           href="https://github.com/Uniswap/token-lists"
         >
           <img
-            style={{
-              filter: 'invert(1)',
-              width: 16,
-              marginRight: 8,
-            }}
+            style={{ filter: 'invert(1)' }}
             src="https://raw.githubusercontent.com/feathericons/feather/master/icons/github.svg"
             alt="github icon"
+            className="w-4 h-4 mr-2" 
           />
-          <span style={{ color: 'white' }}>GitHub</span>
-        </ButtonLink>
-      </Nav>
-    </StyledHeader>
-  )
+          <span className="text-sm sm:text-base">GitHub</span>  
+        </a>
+      </nav>
+    </header>
+  );
 }

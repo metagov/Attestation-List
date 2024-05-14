@@ -119,7 +119,7 @@ export default function PrettyForm() {
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <div className="space-y-12 mt-28 px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12">
                         <div className="border-b border-gray-900/10 pb-12">
-                            <h1 className="text-2xl font-semibold leading-7 text-gray-900 ">Register your DAO Schema</h1>
+                            <h1 className="text-2xl font-semibold leading-7 text-indigo-600">Register your DAO Schema</h1>
                             <p className="mt-1 text-sm leading-6 text-gray-600">
                                 Connect your wallet to get started.
                                 All your DAO Schema registrations will be displayed on the explorer under Issuer profile.
@@ -134,14 +134,16 @@ export default function PrettyForm() {
                         </div>
 
                         <div className="border-b border-gray-900/10 pb-12">
-                            <h2 className="text-base font-semibold leading-7 text-gray-900">Add your DAO Schemas</h2>
+                            <h2 className="text-base font-semibold leading-7 text-indigo-600">Add your DAO Schemas</h2>
                             <p className="mt-1 text-sm leading-6 text-gray-600">Provide Schema UID, Description and the coresponding Network ID for each schema you add.</p>
+                            <p className="mt-1 text-sm leading-6 text-gray-600">You can only attest to the schemas you created.</p>
 
+    
                             <div className="mt-5">
                                 {networkIdFields.map((item, index) => (
 
                                     <div key={item.id} className="grid grid-cols-1 gap-y-8">
-                                        <h2 className="text-base font-semibold leading-7 text-gray-900 mt-10">Schema {index}</h2>
+                                        <h2 className="text-base font-semibold leading-7 text-indigo-400 mt-10">Schema {index}</h2>
 
                                         <div>
                                             <label htmlFor={`networkIds.${index}.value`} className="text-sm font-medium text-gray-900">Network ID</label>
@@ -209,7 +211,7 @@ export default function PrettyForm() {
                         </div>
 
                         <div className="border-b border-gray-900/10 pb-12">
-                            <h2 className="text-base font-semibold leading-7 text-gray-900">Issuer Infromation</h2>
+                            <h2 className="text-base font-semibold leading-7 text-indigo-600">Issuer Infromation</h2>
                             <p className="mt-1 text-sm leading-6 text-gray-600">
                                 This is used to create Issuer profile, please keep the Issuer info consistent if you are registering multiple times.
                             </p>
@@ -361,7 +363,7 @@ export default function PrettyForm() {
                                                 placeholder='Time in secs'
                                                 className="block w-full rounded-md border-0 py-1.5 pl-3 px-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black-600 sm:text-sm sm:leading-6"
                                             />
-                                             {errors.expirationTime && <p className="text-sm text-red-800 mt-1">{errors.expirationTime.message}</p>}
+                                            {errors.expirationTime && <p className="text-sm text-red-800 mt-1">{errors.expirationTime.message}</p>}
 
                                         </div>
                                     </div>
@@ -440,7 +442,7 @@ export default function PrettyForm() {
                                                     placeholder="0x..."
                                                     {...register("recipient")}
                                                 />
-                                             {errors.recipient && <p className="text-sm text-red-800 mt-1">{errors.recipient.message}</p>}
+                                                {errors.recipient && <p className="text-sm text-red-800 mt-1">{errors.recipient.message}</p>}
                                             </div>
                                         </div>
                                     </div>

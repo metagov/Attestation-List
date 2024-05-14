@@ -1,102 +1,52 @@
-import React from 'react'
-import styled from 'styled-components'
-import { Link } from 'react-router-dom'
-
-const Hero = styled.section`
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  margin-top: 6rem;
-  position: sticky;
-  top: 10rem;
-  height: fit-content;
-
-  p {
-    text-align: left;
-    max-width: 400px;
-    font-size: 18px;
-  }
-
-  .title {
-    text-align: left;
-    max-width: 450px;
-    font-size: 48px;
-    line-height: 125%;
-    letter-spacing: 0.002em;
-    color: #1f1f1f;
-    margin: 0;
-    font-family: 'MatterSQ-Medium';
-  }
-
-  .icon {
-    width: 48px;
-  }
-
-  .list {
-    max-width: 960px;
-  }
-
-  a {
-    color: #131313;
-    font-family: 'MatterSQ-SemiBold';
-  }
-
-  .uniswap {
-    color: #ff007a;
-    font-family: 'MatterSQ-Regular';
-  }
-
-  @media screen and (max-width: 960px) {
-    position: relative;
-    top: initial;
-    margin-top: 2rem;
-
-    .title {
-      font-size: 35px;
-    }
-  }
-`
-
-const HoverLink = styled.a`
-  transition: box-shadow 0.25s ease, translate 0.25s ease;
-  margin-top: 0.5rem;
-  width: fit-content;
-  :hover {
-    box-shadow: -6px 6px 0px #d6fdff;
-    translate: 1px -1px;
-  }
-`
+import React from 'react';
+import { Link } from 'react-router-dom';
 
 export default function Header() {
   return (
-    <Hero>
-      <span style={{ marginBottom: '1rem' }}>
+    <section className=" flex flex-col gap-2.5 mt-24  top-40 h-fit">
+      <span className="mb-4">
         A{' '}
-        <a href="https://daostar.org/" className="daostar">
+        <a href="https://daostar.org/" className="font-semibold text-black">
           DAOstar
         </a>{' '}
         Project
       </span>
 
-      <p className="title">An Attestation standard for DAOs.</p>
+      <p className="text-left max-w-[450px] text-4xl leading-[125%] tracking-[0.002em] text-indigo-800 m-0 font-bold">
+        An Attestation standard for DAOs
+      </p>
 
-      <p style={{ fontSize: '20px', lineHeight: '150%' }} className="description" id="why-lists">
+      <p className="text-left max-w-xs text-xl leading-[150%] description" id="why-lists">
         Attestation List is a community-led initiative to improve discoverability, reputation and trust of DAO-related attestations
         in a manner that is inclusive, transparent, and decentralized.
       </p>
-      <HoverLink target="_blank" rel="noopener noreferrer" href="https://daostar.com/daoip6">
+      
+      <a
+        className="transition-all text-indigo-600 ease-in-out duration-300 mt-2 w-fit hover:shadow-indigo-200 hover:-translate-y-1"
+        target="_blank"
+        rel="noopener noreferrer"
+        href="https://daostar.com/daoip6"
+      >
         {'->'} Why Attestation List?
-      </HoverLink>
+      </a>
+      
       <Link
         target="_blank"
         rel="noopener noreferrer"
         to="/attest"
+        className="transition-all text-indigo-600 ease-in-out duration-300 mt-2 w-fit hover:shadow-indigo-200 hover:-translate-y-1"
       >
         {'->'} Make your own
       </Link>
-      <HoverLink target="_blank" rel="noopener noreferrer" href="https://discord.com/invite/PdrPkEZVFk">
+      
+      <a
+        className="transition-all text-indigo-600 ease-in-out duration-300 mt-2 w-fit hover:shadow-indigo-600 hover:-translate-y-1"
+        target="_blank"
+        rel="noopener noreferrer"
+        href="https://discord.com/invite/PdrPkEZVFk"
+      >
         {'->'} Community
-      </HoverLink>
-    </Hero>
+      </a>
+    </section>
   )
 }
