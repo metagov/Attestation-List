@@ -18,7 +18,6 @@ ReactDOM.render(
       <Routes> 
         <Route exact path="/" element={<Home />} />
         <Route path="/schemas" element={<List />} />
-        <Route path="/test" element={<PodcastCard/>} />
         <Route path="/attest" element={<PrettyForm/>} />
         <Route path="/why" element={<Why />} />
       </Routes>
