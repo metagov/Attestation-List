@@ -50,7 +50,7 @@ function Card({ data }) {
               </h5>
             </div>
             <div>
-              <span className="rounded bg-indigo-100 px-2 py-2 text-sm sm:text-base font-medium text-indigo-800">
+              <span className="rounded bg-indigo-100 px-2 py-1 text-sm sm:text-base font-medium text-indigo-800">
                 {data.schemas.length} Schemas
               </span>
             </div>
