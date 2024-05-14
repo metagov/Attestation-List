@@ -25,7 +25,7 @@ export default function Header() {
         className="transition-all text-indigo-600 ease-in-out duration-300 mt-2 w-fit hover:shadow-indigo-200 hover:-translate-y-1"
         target="_blank"
         rel="noopener noreferrer"
-        href="https://daostar.com/daoip6"
+        href="https://docs.daostar.org/DAOIP/7"
       >
         {'->'} Why Attestation List?
       </a>
@@ -36,7 +36,7 @@ export default function Header() {
         to="/attest"
         className="transition-all text-indigo-600 ease-in-out duration-300 mt-2 w-fit hover:shadow-indigo-200 hover:-translate-y-1"
       >
-        {'->'} Make your own
+        {'->'} Add your schema
       </Link>
       
       <a

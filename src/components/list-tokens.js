@@ -98,7 +98,7 @@ const AttestationList = ({ attestations }) => {
   console.log(attestations)
 
   return (
-    <div className="flex flex-col p-5">
+    <div className="flex flex-col p-5 mt-20">
       <h1 className="mb-5 text-3xl font-bold">Attestations</h1>
       <Search handleChange={handleChange} value={searchValue} />
       <FilterResults

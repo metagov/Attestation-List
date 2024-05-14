@@ -15,7 +15,7 @@ export default function Header({ back }) {
           className="ml-2 sm:ml-4 hidden sm:inline"
           target="_blank"
           rel="noopener noreferrer"
-          href="http://community.tokenlists.org/"
+          href="https://discord.gg/PdrPkEZVFk"
         >
           Community
         </a>
@@ -23,7 +23,7 @@ export default function Header({ back }) {
           className="ml-2 sm:ml-4 hidden sm:inline"
           target="_blank"
           rel="noopener noreferrer"
-          href="https://uniswap.org/blog/token-lists/"
+          href="https://docs.daostar.org/DAOIP/7"
         >
           Why lists?
         </a>
@@ -33,14 +33,14 @@ export default function Header({ back }) {
           rel="noopener noreferrer"
           to="/attest"
         >
-          Make a list
+          Add your schema
         </NavLink>
 
         <a
           className="ml-2 sm:ml-4 inline-flex items-center p-2 bg-indigo-800 rounded-lg text-white transition-shadow ease-in-out duration-300 hover:shadow-[0_-6px_6px_rgba(255,255,255,0.7)] hover:-translate-y-1"
           target="_blank"
           rel="noopener noreferrer"
-          href="https://github.com/Uniswap/token-lists"
+          href="https://github.com/metagov/Attestation-List"
         >
           <img
             style={{ filter: 'invert(1)' }}
