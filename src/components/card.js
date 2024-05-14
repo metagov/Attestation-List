@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 function formatName(name) {
-  if (!name) return <></>; // Return empty fragment if no name provided
+  if (!name) return <></>; 
 
   // Find the first space within the first 8 characters
   const maxChars = 8;
