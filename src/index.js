@@ -10,7 +10,6 @@ import * as serviceWorker from './serviceWorker'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import { Web3Provider } from './utils/web3wallet'
 import PrettyForm from './pages/prettyform'
-import PodcastCard from './pages/test'
 
 ReactDOM.render(
     <Web3Provider>
