@@ -10,6 +10,7 @@ import * as serviceWorker from './serviceWorker'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import { Web3Provider } from './utils/web3wallet'
 import PrettyForm from './pages/prettyform'
+import PodcastCard from './pages/test'
 
 ReactDOM.render(
     <Web3Provider>
@@ -17,7 +18,7 @@ ReactDOM.render(
       <Routes> 
         <Route exact path="/" element={<Home />} />
         <Route path="/schemas" element={<List />} />
-        <Route path="/submit" element={<SubmitForm />} />
+        <Route path="/test" element={<PodcastCard/>} />
         <Route path="/attest" element={<PrettyForm/>} />
         <Route path="/why" element={<Why />} />
       </Routes>

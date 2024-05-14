@@ -145,7 +145,7 @@ export default function PrettyForm() {
 
                                         <div>
                                             <label htmlFor={`networkIds.${index}.value`} className="text-sm font-medium text-gray-900">Network ID</label>
-                                            <div class="mt-2">
+                                            <div className="mt-2">
                                                 <select {...register(`networkIds.${index}.value`, {
                                                     required: (<p className="text-sm text-red-800">
                                                         "Network ID is required"

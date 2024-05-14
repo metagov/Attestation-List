@@ -1,58 +1,9 @@
 import React, { useState, useEffect, useMemo } from 'react';
-import styled from 'styled-components';
 import FilterResults from 'react-filter-search';
-
 import Card from './card';
 import Search from './search';
 
 const apiUrl = "https://attestation-list-api.onrender.com/schema_attestations/0x25eb07102ee3f4f86cd0b0c4393457965b742b8acc94aa3ddbf2bc3f62ed1381";
-
-const StyledAllLists = styled.section`
-  min-height: 80vh;
-  width: 100%;
-  padding: 5rem 0 6rem 0;
-  display: grid;
-  gap: 24px;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: flex-start;
-  height: fit-content;
-  @media screen and (max-width: 960px) {
-    padding: 0;
-    align-items: flex-start;
-  }
-`;
-
-const CardWrapper = styled.div`
-  display: grid;
-  flex-wrap: wrap;
-  justify-content: flex-start;
-  max-width: 720px;
-  min-width: 720px;
-  grid-gap: 1.5rem;
-  grid-template-columns: 1fr 1fr 1fr;
-
-  @media screen and (max-width: 960px) {
-    max-width: initial;
-    min-width: initial;
-    grid-template-columns: 1fr 1fr;
-  }
-
-  @media screen and (max-width: 414px) {
-    display: flex;
-    flex-wrap: wrap;
-    max-width: initial;
-    min-width: initial;
-    grid-template-columns: 1fr;
-  }
-`;
-
-const Loader = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-`;
 
 export default function AllLists() {
   const [value, setValue] = useState('');
@@ -96,28 +47,30 @@ export default function AllLists() {
   }, [attestations]);
 
   return (
-    <StyledAllLists>
+    <section className="min-h-screen w-full py-20 px-0 md:px-10 grid gap-6">
       <Search handleChange={handleChange} value={value} setValue={setValue} />
 
-      <CardWrapper>
+      <div className="overflow-y-auto max-h-screen px-5 md:px-0 max-w-6xl mx-auto" style={{ height: 'calc(100vh - 10rem)' }}>
         {loading ? (
-          <Loader><div className="loader"></div></Loader>
+          <div className="flex justify-center items-center h-full w-full">
+            <div className="loader"></div>
+          </div>
         ) : (
           <FilterResults
             value={value}
             data={data}
             renderResults={(results) =>
               results.length === 0
-                ? 'None found!'
-                : results.map((result) => (
-                    <Card key={result.id} data={result} />
-                  ))
+                ? <div>None found!</div>
+                : <div className="flex flex-col space-y-4">
+                    {results.map((result) => (
+                      <Card key={result.id} data={result} />
+                    ))}
+                  </div>
             }
           />
         )}
-      </CardWrapper>
-    </StyledAllLists>
+      </div>
+    </section>
   );
 }
-
-

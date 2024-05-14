@@ -1,72 +1,53 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import styled from 'styled-components';
 
-const StyledCard = styled(Link)`
-  border-radius: 8px;
-  padding: 1.5rem;
-  max-width: 172px;
-  display: flex;
-  justify-content: space-between;
-  flex-direction: column;
-  transition: box-shadow 0.25s ease, translate 0.25s ease;
-  scale: 1;
-  background-color: white;
-  text-decoration: none;
-  color: #0f0f0f;
-  border: 0.75px solid #131313;
-  box-shadow: -8px 8px 0px #d6fdff;
+function formatName(name) {
+  const breakInterval = 5;
+  let chunks = [];
+  if (name) {
+    for (let i = 0; i < name.length; i += breakInterval) {
+      const chunk = name.slice(i, i + breakInterval);
+      // Wrap each chunk in a span with a zero-width space at the end to encourage breaking
+      chunks.push(<span key={i}>{chunk}&#8203;</span>);
+    }
+    return <>{chunks}</>;
+  } else
+    return <></>;
+}
 
-  @media screen and (max-width: 960px) {
-    max-width: initial;
-  }
-  @media screen and (max-width: 414px) {
-    width: 320px;
-    box-sizing: border-box;
-  }
-  :hover {
-    box-shadow: -12px 12px 0px #d6fdff;
-    translate: 2px -2px;
-  }
-
-  h3 {
-    font-size: 24px;
-    line-height: 150%;
-  }
-
-  img {
-    max-width: 64px;
-    width: fit-content;
-    margin-bottom: 2rem;
-  }
-`;
-
-const DescriptionText = styled.span`
-  font-size: 14px;
-  line-height: 150%;
-`;
-
-const NameText = styled.h3`
-  word-wrap: break-word;
-`;
 
 function Card({ data, name }) {
   const logoURL = data.logo.startsWith('http') ? data.logo.trim() : `https://via.placeholder.com/150`;
+  console.log(data)
 
   return (
-    <StyledCard to={`/schemas?id=${data.id}`} className="card">
-      <img
-        alt={`${name} logo`}
-        src={logoURL}
-        onError={(e) => {
-          e.target.src = 'https://via.placeholder.com/150';
-        }}
-      />
-      <section>
-        <NameText>{data.name}</NameText>
-        <DescriptionText>{data.description}</DescriptionText>
-      </section>
-    </StyledCard>
+    <Link to={`/schemas?id=${data.id}`} className="no-underline">
+      <div className="mx-auto mt-6 overflow-hidden rounded-lg border border-gray-200 bg-white shadow-md sm:max-w-sm md:max-w-lg">
+        <div className="p-4 sm:p-6">
+          <div className="flex flex-col items-center justify-between md:flex-row m-2">
+            <div className="flex items-center space-x-0">
+              <div className="relative">
+                <img
+                  alt={`${data.name} logo`}
+                  src={logoURL}
+                  onError={(e) => {
+                    e.target.src = 'https://via.placeholder.com/150';
+                  }}
+                  className='h-14 w-14'
+                />
+              </div>
+              <h5 className="text-xl font-semibold text-gray-900 break-words p-2">
+                {formatName(data.name)}
+              </h5>
+            </div>
+            <div className="mt-4 ml-2 flex flex-col md:mt-0">
+              <span className="mb-1 rounded bg-indigo-100 px-1 py-0.5 text-sm font-medium text-indigo-800 sm:px-2.5 sm:py-1"> {data.schemas.length} Schemas</span>
+              {/* <span className="rounded bg-indigo-100 px-1 py-0.5 text-sm font-medium text-indigo-800 sm:px-2.5 sm:py-1">1350 Attestations</span> */}
+            </div>
+          </div>
+        </div>
+      </div>
+    </Link>
   );
 }
 

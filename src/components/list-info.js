@@ -1,81 +1,29 @@
 import React from 'react';
-import styled from 'styled-components';
 import Card from './card';  // Assuming this Card can be adapted for displaying attestation issuer details
-import CopyHelper from './copy';
-
-const StyledInfo = styled.section`
-  display: grid;
-  grid-template-rows: 1fr;
-  grid-gap: 2rem;
-  max-width: 960px;
-  box-sizing: border-box;
-  padding: 3rem 0;
-  min-height: 400px;
-  position: sticky;
-  top: 3rem;
-  height: 400px;
-
-  @media screen and (max-width: 960px) {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-gap: 3rem;
-    position: relative;
-    align-items: flex-start;
-    min-height: initial;
-    top: initial;
-    margin-top: 2rem;
-    height: fit-content;
-    padding: 0;
-  }
-
-  @media screen and (max-width: 414px) {
-    grid-template-columns: 1fr;
-    width: 100%;
-    overflow: hidden;
-  }
-`;
-
-const InfoDescription = styled.div`
-  display: grid;
-  grid-gap: 1rem;
-  font-size: 1rem;
-  span {
-    margin: 0.25rem 0;
-    color: #797878;
-  }
-`;
-
-const Helper = styled.div`
-  padding: 0.5rem;
-  background-color: #d6fdff;
-  color: #000;
-  border-radius: 8px;
-  font-size: 14px;
-`;
 
 export default function Info({ attestation }) {
   return (
-    <StyledInfo>
-      <Card data={attestation} /> 
-      <InfoDescription>
-        <span className="grid">
-         API Docs URL
-          <span>
-            <a href={attestation.apiDocsURI} target="_blank" rel="noopener noreferrer">{attestation.apiDocsURI}</a>
-          </span>
-        </span>
-
-        {/* <Helper>Copy the API Docs URL to share or reference.</Helper> */}
-      
-        <span>
-          <small>Issuer Name</small>
-          <p>{attestation.issuerName}</p>
-        </span>
-        <span>
-          <small>Issuer Description</small>
-          <p>{attestation.issuerDescription}</p>
-        </span>
-      </InfoDescription>
-    </StyledInfo>
+    <section className="flex flex-col gap-4 max-w-4xl mx-auto p-6 my-8 sm:p-8 sm:my-10 sticky top-12  rounded-lg">
+      <Card data={attestation} />
+      <div className="flex flex-col gap-2">
+        <div className="text-gray-900 font-semibold">
+          <span className="block text-sm font-medium text-indigo-600">API Docs URL</span>
+          <a href={attestation.apiDocsURI} target="_blank" rel="noopener noreferrer" className="font-light text=gray-800 hover:text-indigo-700 transition-colors duration-300">
+            {attestation.apiDocsURI}
+          </a>
+        </div>
+        <div>
+          <span className="block text-sm font-medium text-indigo-600">Issuer Name</span>
+          <p className="text-gray-800">{attestation.issuerName}</p>
+        </div>
+        <div>
+          <span className="block text-sm font-medium text-indigo-600">Issuer Description</span>
+          <p className="text-gray-800">{attestation.issuerDescription}</p>
+        </div>
+        <div className="mt-4 text-xs text-indigo-500 italic">
+            Note: Currently, only the Optimism network is supported.
+          </div>
+      </div>
+    </section>
   );
 }
