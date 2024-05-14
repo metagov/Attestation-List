@@ -136,9 +136,14 @@ export default function PrettyForm() {
                         <div className="border-b border-gray-900/10 pb-12">
                             <h2 className="text-base font-semibold leading-7 text-indigo-600">Add your DAO Schemas</h2>
                             <p className="mt-1 text-sm leading-6 text-gray-600">Provide Schema UID, Description and the coresponding Network ID for each schema you add.</p>
-                            <p className="mt-1 text-sm leading-6 text-gray-600">You can only attest to the schemas you created.</p>
+                            <p className="mt-1 text-sm leading-6 text-gray-600">You can only attest to the schemas you created and have context set in the mentioned schema, </p>
 
-    
+                            <a href="https://optimism.easscan.org/schema/view/0xcc6c9b07bfccd15c8f313d23bf4389fb75629a620c5fa669c898bf1e023f2508"
+                                className="text-indigo-600 text-xs hover:text-indigo-800 visited:text-indigo-600 underline transition-colors duration-300"
+                                target="_blank"
+                                rel="noopener noreferrer">
+                                View Schema
+                            </a>
                             <div className="mt-5">
                                 {networkIdFields.map((item, index) => (
 
@@ -147,15 +152,21 @@ export default function PrettyForm() {
 
                                         <div>
                                             <label htmlFor={`networkIds.${index}.value`} className="text-sm font-medium text-gray-900">Network ID</label>
+                                            <p className="text-xs font-light text-gray-400">Only Optimism is supported</p>
+
                                             <div className="mt-2">
                                                 <select {...register(`networkIds.${index}.value`, {
                                                     required: (<p className="text-sm text-red-800">
                                                         "Network ID is required"
-                                                    </p>)
+                                                    </p>),
+                                                    pattern: {
+                                                        value: 10,
+                                                        message: "Please select Optimism, other networks are not supported yet."
+                                                    }
                                                 })} className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-black-600 sm:max-w-xs sm:text-sm sm:leading-6">
-                                                    <option value="1">Ethereum</option>
+                                                    <option disabled value="1">Ethereum</option>
                                                     <option value="10">Optimism</option>
-                                                    <option value="137">Polygon</option>
+                                                    <option disabled value="137">Polygon</option>
                                                 </select>
                                             </div>
                                             {errors.networkIds?.[index]?.value && (
@@ -202,7 +213,7 @@ export default function PrettyForm() {
                                     <button
                                         type="button"
                                         onClick={addAllFields}
-                                        className="rounded-md bg-slate-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-slate-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black-600"
+                                        className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-slate-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black-600"
                                     >
                                         Add
                                     </button>
@@ -329,7 +340,7 @@ export default function PrettyForm() {
                                 <button
                                     type="button"
                                     onClick={() => setShowAdvanced(!showAdvanced)}
-                                    className="rounded-md bg-slate-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-slate-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black-600"
+                                    className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-slate-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black-600"
                                 >
                                     {showAdvanced ? 'Hide Additional Settings' : 'Show Additional Settings'}
                                 </button>
@@ -454,7 +465,7 @@ export default function PrettyForm() {
                         <div className=" flex items-center justify-end gap-x-6 mb-8 sm:mr-2">
                             <button
                                 type="submit"
-                                className="rounded-md bg-black mb-8 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-slate-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black-600"
+                                className="rounded-md bg-indigo-800 mb-8 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black-600"
                             >
                                 Submit
                             </button>
