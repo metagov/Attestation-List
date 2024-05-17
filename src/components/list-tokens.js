@@ -128,8 +128,8 @@ const AttestationList = ({ attestations }) => {
                   <DecodedSchema schemaString={attestation.schemaDetails.schema} />
                   {showDetails && (
                     <>
-                      <div className="mb-2 mt-4 font-semibold">Schema Info:</div>
-                      <div className="flex flex-wrap items-start justify-start gap-1">
+                      <div className="mb-2 ml-2 mt-4 font-semibold">Schema Info:</div>
+                      <div className="flex ml-2 flex-wrap items-start justify-start gap-1">
                         <div className="text-xs text-gray-600"><strong>Schema UID:</strong> {attestation.schemaUID}</div>
                         <div className="text-xs text-gray-600"><strong>Creator:</strong> {attestation.schemaDetails.creator}</div>
                         <div className="text-xs text-gray-600"><strong>ID:</strong> {attestation.schemaDetails.id}</div>
