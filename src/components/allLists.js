@@ -40,7 +40,7 @@ export default function AllLists() {
       id: attester.attesterAddress,
       name: attester.issuerName,
       description: attester.issuerDescription,
-      logo: attester.logo.trim(),
+      logo: attester.logo,
       apiDocsURI: attester.apiDocsURI,
       schemas: attester.schemas
     }));
