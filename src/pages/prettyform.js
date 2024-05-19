@@ -170,17 +170,14 @@ export default function PrettyForm() {
 
                                         <div>
                                             <label htmlFor={`networkIds.${index}.value`} className="text-sm font-medium text-gray-900">Network ID</label>
-                                            <p className="text-xs font-light text-gray-400">Only Optimism is supported</p>
+                                            <p className="text-xs font-light text-gray-400">Select the network on which your Schema exists.</p>
 
                                             <div className="mt-2">
                                                 <select {...register(`networkIds.${index}.value`, {
                                                     required: (<p className="text-sm text-red-800">
-                                                        "Network ID is required"
+                                                        "Please select the network for your Schema"
                                                     </p>),
-                                                    pattern: {
-                                                        value: 10,
-                                                        message: "Please select Optimism, other networks are not supported yet."
-                                                    }
+                                            
                                                 })} className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-black-600 sm:max-w-xs sm:text-sm sm:leading-6">
                                                     <option value="1">Ethereum</option>
                                                     <option value="10">Optimism</option>
