@@ -154,7 +154,7 @@ const AttestationList = ({ attestations }) => {
                       </svg>
                     </a>
                   </div>
-                  <span className="rounded px-2.5 py-1 text-xs font-medium text-indigo-600">
+                  <span className="rounded px-2.5 py-1 text-xs font-bold text-indigo-600">
                     Created: <TimeSince dateString={attestation.schemaDetails.time} />
                   </span>
                 </div>

@@ -20,9 +20,7 @@ export default function Info({ attestation }) {
           <span className="block text-sm sm:text-base font-medium text-indigo-600">Issuer Description</span>
           <p className="text-gray-800">{attestation.issuerDescription}</p>
         </div>
-        <div className="mt-4 text-xs sm:text-sm text-indigo-300 italic">
-            Note: Currently, only Optimism network is supported.
-        </div>
+  
       </div>
     </section>
   );
