@@ -127,16 +127,16 @@ export default function PrettyForm() {
                             <h1 className="text-lg mt-2 font-semibold leading-7 text-indigo-500">Valid Schemas checklist:</h1>
 
                             <div class="flex items-center mb-1">
-                                <input id="checkbox-1" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
-                                <label for="default-checkbox" class="ms-2 ml-1 text-sm font-medium text-gray-900 dark:text-gray-300">Ensure correct Schema UID on  EAS Optimism or EAS Base network</label>
+                                <input id="checkbox-1" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500" />
+                                <label for="default-checkbox" class="ms-2 ml-1 text-sm font-medium text-gray-900 ">Ensure correct Schema UID on  EAS Optimism or EAS Base network</label>
                             </div>
                             <div class="flex items-center mb-1">
-                                <input id="checkbox-2" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-6000" />
-                                <label for="checked-checkbox" class="ms-2 ml-1 text-sm font-medium text-gray-900 dark:text-gray-300">Schema has context set or has a context field in schema</label>
+                                <input id="checkbox-2" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500" />
+                                <label for="checked-checkbox" class="ms-2 ml-1 text-sm font-medium text-gray-900 ">Schema has context set or has a context field in schema</label>
                             </div>
                             <div class="flex items-center mb-1">
-                                <input id="checkbox-3" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-6000" />
-                                <label for="checked-checkbox" class="ms-2 ml-1 text-sm font-medium text-gray-900 dark:text-gray-300">Ensure you are the creator of the schema you are attesting</label>
+                                <input id="checkbox-3" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500" />
+                                <label for="checked-checkbox" class="ms-2 ml-1 text-sm font-medium text-gray-900">Ensure you are the creator of the schema you are attesting</label>
                             </div>
                             <div className="flex mt-10">
                                 <p className="mt-1 mr-2 text-sm leading-6 text-gray-600">
