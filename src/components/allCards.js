@@ -64,7 +64,7 @@ export default function AllAttestations() {
 
   return (
     <section className="min-h-screen w-full md:max-w-screen-xl py-10 px-4 sm:px-10 flex flex-col gap-6">
-      <div className="flex justify-between items-center sm:flex-col">
+      <div className="flex justify-between items-center">
         <h1 className="text-2xl font-medium text-indigo-800">Explore DAO Attestation Issuers</h1>
         <div className="mt-10">
           <Search handleChange={handleChange} value={value} setValue={setValue} />
