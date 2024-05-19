@@ -1,9 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+
 
 export default function Header() {
+  const navigate = useNavigate();
+
   return (
-    <section className=" flex flex-col gap-2.5 mt-24  top-40 h-fit">
+    <section className=" flex flex-col gap-2.5 mt-24 top-40 h-fit">
       <span className="mb-4">
         A{' '}
         <a href="https://daostar.org/" className="font-semibold text-black">
@@ -47,6 +51,12 @@ export default function Header() {
       >
         {'->'} Community
       </a>
+          <button
+            onClick={() => navigate('/explore')}
+            className="bg-indigo-600 w-md text-white mt-4 px-4 py-2 rounded-md"
+          >
+            Explore
+          </button>
     </section>
   )
 }

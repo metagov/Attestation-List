@@ -10,6 +10,9 @@ DAO Attestation Lists is a community-led initiative to improve discoverability, 
 
 Uses CRA. `yarn` and `yarn start` to develop.
 
+For Tailwind CSS,
+`npx tailwindcss -i ./src/input.css -o ./src/output.css --watch`
+
 
 ### Attestation-List-API
 

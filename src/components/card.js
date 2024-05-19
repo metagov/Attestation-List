@@ -5,7 +5,7 @@ function formatName(name) {
   if (!name) return <></>; 
 
   // Find the first space within the first 8 characters
-  const maxChars = 8;
+  const maxChars = 12;
   let end = Math.min(name.length, maxChars); // Prevent exceeding the name's length
   let spaceIndex = name.substring(0, end).indexOf(' ');
 
