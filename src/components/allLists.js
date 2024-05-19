@@ -48,17 +48,6 @@ export default function AllLists() {
     }));
   }, [attestations]);
 
-  const demoData = [
-    { id: 1, name: "Issuer 1", description: "Description for Issuer 1", logo: "https://via.placeholder.com/150", apiDocsURI: "https://example.com", schemas: ["schema1" ,"kkkk"] },
-    { id: 2, name: "Issuer 2", description: "Description for Issuer 2", logo: "https://via.placeholder.com/150", apiDocsURI: "https://example.com", schemas: ["schema2"] },
-    { id: 3, name: "Issuer 3", description: "Description for Issuer 3", logo: "https://via.placeholder.com/150", apiDocsURI: "https://example.com", schemas: ["schema3"] },
-    { id: 4, name: "Issuer 4", description: "Description for Issuer 4", logo: "https://via.placeholder.com/150", apiDocsURI: "https://example.com", schemas: ["schema4"] },
-    { id: 5, name: "Issuer 5", description: "Description for Issuer 5", logo: "https://via.placeholder.com/150", apiDocsURI: "https://example.com", schemas: ["schema5"] },
-    { id: 6, name: "Issuer 6", description: "Description for Issuer 6", logo: "https://via.placeholder.com/150", apiDocsURI: "https://example.com", schemas: ["schema6"] },
-    { id: 7, name: "Issuer 7", description: "Description for Issuer 7", logo: "https://via.placeholder.com/150", apiDocsURI: "https://example.com", schemas: ["schema7"] },
-    { id: 8, name: "Issuer 8", description: "Description for Issuer 8", logo: "https://via.placeholder.com/150", apiDocsURI: "https://example.com", schemas: ["schema8"] },
-    { id: 9, name: "Issuer 9", description: "Description for Issuer 9", logo: "https://via.placeholder.com/150", apiDocsURI: "https://example.com", schemas: ["schema9"] },
-  ];
 
   // Limit displayed cards to 3
   const limitedData = data.slice(0, 3);

@@ -85,7 +85,7 @@ export default function AllAttestations() {
         ) : (
           <FilterResults
             value={value}
-            data={demoData}
+            data={data}
             renderResults={(results) => {
               console.log("Rendering results:", results); 
               if (results.length === 0) {
