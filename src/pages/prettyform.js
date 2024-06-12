@@ -128,7 +128,7 @@ export default function PrettyForm() {
 
                             <div class="flex items-center mb-1">
                                 <input id="checkbox-1" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500" />
-                                <label for="default-checkbox" class="ms-2 ml-1 text-sm font-medium text-gray-900 ">Ensure correct Schema UID on  EAS Optimism or EAS Base network</label>
+                                <label for="default-checkbox" class="ms-2 ml-1 text-sm font-medium text-gray-900 ">Ensure correct Schema UID on EAS Supported networks</label>
                             </div>
                             <div class="flex items-center mb-1">
                                 <input id="checkbox-2" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500" />
