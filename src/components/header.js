@@ -57,8 +57,7 @@ export default function Header({ back }) {
           className=" inline-flex items-center p-2 bg-indigo-700 rounded-lg text-white transition-shadow ease-in-out duration-300 hover:shadow-[0_-6px_6px_rgba(255,255,255,0.7)] hover:-translate-y-1"
           target="_blank"
           rel="noopener noreferrer"
-          href="https://github.com/metagov/Attestation-List"
-        >
+          href="https://t.me/daoattestationlist"
           
           <img
             style={{ filter: 'invert(1)' }}
