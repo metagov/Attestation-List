@@ -48,7 +48,26 @@ export default function Header({ back }) {
             alt="github icon"
             className="w-4 h-4 mr-2" 
           />
+          
           <span className="text-sm sm:text-base">GitHub</span>  
+        </a>
+
+        
+        <a
+          className=" inline-flex items-center p-2 bg-indigo-700 rounded-lg text-white transition-shadow ease-in-out duration-300 hover:shadow-[0_-6px_6px_rgba(255,255,255,0.7)] hover:-translate-y-1"
+          target="_blank"
+          rel="noopener noreferrer"
+          href="https://github.com/metagov/Attestation-List"
+        >
+          
+          <img
+            style={{ filter: 'invert(1)' }}
+            src="https://raw.githubusercontent.com/feathericons/feather/master/icons/tool.svg"
+            alt="tool icon"
+            className="w-4 h-4 mr-2" 
+          />
+          
+          <span className="text-sm sm:text-base">Support</span>  
         </a>
       </nav>
     </header>

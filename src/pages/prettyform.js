@@ -7,6 +7,57 @@ import { useEthersSigner, useSigner } from '../utils/wagmiutils';
 import { useAccount, useNetwork } from "wagmi";
 import { ethers, isBytesLike } from "ethers";
 import ErrorBoundary from '../components/errorboundary';
+import { lookupGraphqlScanner } from '../utils/getChainId';
+import Toast from '../components/toast';
+
+export async function verifyCreator(networkId, schemaId, connectedAddress) {
+    const endpoint = lookupGraphqlScanner(networkId);
+    if (endpoint === "Unknown chain ID") {
+        console.error("Unsupported network ID.");
+        alert("Unsupported Netowork ID");
+        return false;
+    }
+
+    const query = `
+        query GetSchema($where: SchemaWhereUniqueInput!) {
+            getSchema(where: $where) {
+                creator
+            }
+        }
+    `;
+    const variables = {
+        where: {
+            id: schemaId
+        }
+    };
+
+    try {
+        const response = await fetch(endpoint, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+            },
+            body: JSON.stringify({
+                query,
+                variables
+            })
+        });
+
+        const jsonResponse = await response.json();
+        console.log(jsonResponse)
+        if (jsonResponse.data && jsonResponse.data.getSchema) {
+            return jsonResponse.data.getSchema.creator === connectedAddress;
+        } else {
+            console.error("No data returned from the query.");
+            return false;
+        }
+    } catch (error) {
+        console.error("Error querying GraphQL endpoint:", error);
+        return false;
+    }
+}
+
 
 
 export default function PrettyForm() {
@@ -14,11 +65,40 @@ export default function PrettyForm() {
     const { address, isConnected, chain } = useAccount();
     const signer = useEthersSigner();
     const [isChecked, setIsChecked] = useState(false);
+    const [loading, setLoading] = useState(false);
+
+    const [showToast, setShowToast] = useState(false);
+    const [toastMessage, setToastMessage] = useState('');
+    const [toastType, setToastType] = useState('success'); // 'success', 'danger', 'warning'
+
+    const verifyCreatorAsync = async (networkId, schemaUid) => {
+        if (!chain || !address) {
+            setToastType('warning');
+            setToastMessage("Wallet not connected.");
+            setShowToast(true);
+            return false;
+        }
+        if (!networkId || !schemaUid) {
+            setToastType('warning');
+            setToastMessage("Incomplete data for verification.");
+            setShowToast(true);
+            return false;
+        }
+        const result = await verifyCreator(networkId, schemaUid, address);
+        if (result === false) {
+            setToastType('danger');
+            setToastMessage("Verification failed: You are not the creator of this schema or this schema does not exist.");
+            setShowToast(true);
+            return false;
+        }
+        return true;
+    };
+  
 
     const handleToggle = () => {
         setIsChecked(!isChecked);
     };
-    const { register, handleSubmit, formState: { errors }, control, watch } = useForm({
+    const { register, handleSubmit, setError, getValues, formState: { errors }, control, watch } = useForm({
         defaultValues: {
             schemaUids: [{ value: "" }],
             schemaDescriptions: [{ value: "" }],
@@ -27,7 +107,8 @@ export default function PrettyForm() {
             issuerDescription: "",
             logoUri: "https://optimism.easscan.org/logo2.png?v=3",
             apiDocsUri: "",
-        }
+        },
+        mode:'onTouched'
     });
 
     useEffect(() => {
@@ -59,8 +140,8 @@ export default function PrettyForm() {
             alert('Please connect your wallet to make an attestation')
 
         }
+       
         eas.connect(signer);
-
         const encodedData = schemaEncoder.encodeData([
             { name: "schemaUID", value: data.schemaUids.map(uid => uid.value), type: "bytes32[]" },
             { name: "schemaDescription", value: data.schemaDescriptions.map(desc => desc.value), type: "string[]" },
@@ -95,11 +176,26 @@ export default function PrettyForm() {
 
     };
 
-    const addAllFields = () => {
+   
+    const addAllFields = async () => {
+        const lastIndex = schemaUidFields.length - 1; // Index of the last item
+        if (lastIndex >= 0) {
+            const networkId = parseInt(getValues(`networkIds.${lastIndex}.value`), 10);
+            const schemaUid = getValues(`schemaUids.${lastIndex}.value`);
+    
+            const isCreator = await verifyCreatorAsync(networkId, schemaUid);
+            if (isCreator !== true) {
+                alert("Verification failed: You are not the creator of this schema.");
+                return;
+            }
+        }
+    
+        // If verification passes or no items yet, append new fields
         appendSchemaUid({ value: '' });
         appendSchemaDesc({ value: '' });
         appendNetworkId({ value: '' });
     };
+    
     const removeAllFieldsAtIndex = () => {
         removeSchemaUid(-1);
         removeSchemaDesc(-1);
@@ -116,6 +212,7 @@ export default function PrettyForm() {
         )}>
             <div className="app">
                 <Header back={true} />
+
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <div className="space-y-12 mt-28 px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12">
                         <div className="border-b border-gray-900/10 pb-12">
@@ -147,6 +244,7 @@ export default function PrettyForm() {
 
                         </div>
 
+
                         <div className="border-b border-gray-900/10 pb-12">
                             <h2 className="text-base font-semibold leading-7 text-indigo-600">Add Your DAO Schemas</h2>
                             <p className="mt-1 text-sm leading-6 text-gray-600">
@@ -167,6 +265,7 @@ export default function PrettyForm() {
 
                                     <div key={item.id} className="grid grid-cols-1 gap-y-8">
                                         <h2 className="text-base font-semibold leading-7 text-indigo-400 mt-10">Schema {index}</h2>
+                                        <Toast type={toastType} message={toastMessage} onClose={() => setShowToast(false)} isVisible={showToast} />
 
                                         <div>
                                             <label htmlFor={`networkIds.${index}.value`} className="text-sm font-medium text-gray-900">Network ID</label>
@@ -487,6 +586,7 @@ export default function PrettyForm() {
                         <div className=" flex items-center justify-end gap-x-6 mb-8 sm:mr-2">
                             <button
                                 type="submit"
+                                disabled={loading}
                                 className="rounded-md bg-indigo-800 mb-8 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black-600"
                             >
                                 Submit

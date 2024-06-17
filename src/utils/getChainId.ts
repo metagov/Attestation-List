@@ -71,3 +71,24 @@ export function lookupScanner(chainId: number) {
     }
     
 }
+
+
+export function lookupGraphqlScanner(chainId: number) {
+    switch(chainId) {
+        case 1: return "https://easscan.org/graphql";
+        case 10: return "https://optimism.easscan.org/graphql";
+        case 137: return "https://polygon.easscan.org/graphql";
+        case 42161: return "https://arbitrum.easscan.org/graphql";
+        case 42170: return "https://arbitrum-nova.easscan.org/graphql";
+        case 534352: return "https://scroll.easscan.org/graphql";
+        case 8453: return "https://base.easscan.org/graphql";
+        case 59140: return "https://linea.easscan.org/graphql";
+        case 1115511: return "https://sepolia.easscan.org/graphql";
+        case 11155420: return "https://optimism-sepolia.easscan.org/graphql";
+        case 84532: return "https://base-sepolia.easscan.org/graphql";
+        case 84531: return "https://base-goerli.easscan.org/graphql";
+        case 80001: return "https://polygon-mumbai.easscan.org/graphql";
+        case 534351: return "https://scroll-sepolia.easscan.org/graphql";
+        default: return "Unknown chain ID";
+    }
+}
