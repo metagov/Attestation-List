@@ -25,7 +25,7 @@ export default function Header({ back }) {
           rel="noopener noreferrer"
           href="https://docs.daostar.org/DAOIP/7"
         >
-          Why lists?
+          Specification
         </a>
         <NavLink
           className="ml-2 sm:ml-4 hidden sm:inline"

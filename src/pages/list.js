@@ -41,6 +41,7 @@ function List() {
         const searchParams = new URLSearchParams(location.search);
         const attestationId = searchParams.get('id');
         const response = await fetch(`https://attestation-list-api.onrender.com/attestations/${attestationId}`);
+        const refreshresponse = await fetch(`https://attestation-list-api.onrender.com/attestations/${attestationId}?refresh=true`);
         const jsonData = await response.json();
         setData(jsonData);
       } catch (e) {
