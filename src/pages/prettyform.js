@@ -15,6 +15,7 @@ export async function verifyCreator(networkId, schemaId, connectedAddress) {
     if (endpoint === "Unknown chain ID") {
         console.error("Unsupported network ID.");
         alert("Unsupported Netowork ID");
+
         return false;
     }
 
@@ -137,7 +138,11 @@ export default function PrettyForm() {
         // alert(JSON.stringify(data, null, 2)); // Pretty print the JSON data
 
         if (!isConnected || !chain) {
-            alert('Please connect your wallet to make an attestation')
+            //alert('Please connect your wallet to make an attestation')
+            setToastType('warning');
+            setToastMessage("Wallet not connected.");
+            setShowToast(true);
+
 
         }
 
@@ -188,7 +193,10 @@ export default function PrettyForm() {
 
             const isCreator = await verifyCreatorAsync(networkId, schemaUid);
             if (isCreator !== true) {
-                alert("Verification failed: You are not the creator of this schema.");
+                setToastType('warning');
+                setToastMessage("Verification failed: You are not the creator of this schema.");
+                setShowToast(true);
+                //alert("Verification failed: You are not the creator of this schema.");
                 return;
             }
         }
