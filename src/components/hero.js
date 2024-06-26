@@ -29,7 +29,7 @@ export default function Header() {
         className="transition-all text-indigo-600 ease-in-out duration-300 mt-2 w-fit hover:shadow-indigo-200 hover:-translate-y-1"
         target="_blank"
         rel="noopener noreferrer"
-        href="https://docs.daostar.org/DAOIP/7"
+        href="https://github.com/metagov/daostar/discussions/230"
       >
         {'->'} Why Attestation List?
       </a>
@@ -57,6 +57,22 @@ export default function Header() {
           >
             Explore
           </button>
+
+
+          <div className="mt-8">
+        <h2 className="text-left text-xl font-bold text-indigo-800">Supported By</h2>
+        <div className="flex flex-wrap gap-4 mt-4">
+          <a href="https://example1.com" className="transition-all text-indigo-600 ease-in-out duration-300 hover:shadow-indigo-200 hover:-translate-y-1">
+            <img src="https://cryptologos.cc/logos/optimism-ethereum-op-logo.png?v=032" alt="Supporter 1" className="h-12"/>
+          </a>
+          <a href="https://example2.com" className="transition-all text-indigo-600 ease-in-out duration-300 hover:shadow-indigo-200 hover:-translate-y-1">
+            <img src="https://attest.org/logo2.png?v=3" alt="Supporter 2" className="h-12"/>
+          </a>
+          <a href="https://example3.com" className="transition-all text-indigo-600 ease-in-out duration-300 hover:shadow-indigo-200 hover:-translate-y-1">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSt6WSOjzQP8a7mrbMfWECrIHILWMLn-Ue6xg&s" alt="Supporter 3" className="h-12"/>
+          </a>
+        </div>
+      </div>
     </section>
   )
 }

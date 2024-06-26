@@ -93,7 +93,7 @@ export default function PrettyForm() {
         }
         return true;
     };
-  
+
 
     const handleToggle = () => {
         setIsChecked(!isChecked);
@@ -108,7 +108,7 @@ export default function PrettyForm() {
             logoUri: "https://optimism.easscan.org/logo2.png?v=3",
             apiDocsUri: "",
         },
-        mode:'onTouched'
+        mode: 'onTouched'
     });
 
     useEffect(() => {
@@ -140,7 +140,7 @@ export default function PrettyForm() {
             alert('Please connect your wallet to make an attestation')
 
         }
-       
+
         eas.connect(signer);
         const encodedData = schemaEncoder.encodeData([
             { name: "schemaUID", value: data.schemaUids.map(uid => uid.value), type: "bytes32[]" },
@@ -170,32 +170,35 @@ export default function PrettyForm() {
 
         const newAttestationUID = await tx.wait();
         if (newAttestationUID !== '') {
-            alert("Attestation successful!", newAttestationUID);
+            setToastType('success');
+            setToastMessage("Attestation successful!");
+            setShowToast(true);
+            //alert("Attestation successful!", newAttestationUID);
             console.log("New attestation UID:", newAttestationUID);
         }
 
     };
 
-   
+
     const addAllFields = async () => {
         const lastIndex = schemaUidFields.length - 1; // Index of the last item
         if (lastIndex >= 0) {
             const networkId = parseInt(getValues(`networkIds.${lastIndex}.value`), 10);
             const schemaUid = getValues(`schemaUids.${lastIndex}.value`);
-    
+
             const isCreator = await verifyCreatorAsync(networkId, schemaUid);
             if (isCreator !== true) {
                 alert("Verification failed: You are not the creator of this schema.");
                 return;
             }
         }
-    
+
         // If verification passes or no items yet, append new fields
         appendSchemaUid({ value: '' });
         appendSchemaDesc({ value: '' });
         appendNetworkId({ value: '' });
     };
-    
+
     const removeAllFieldsAtIndex = () => {
         removeSchemaUid(-1);
         removeSchemaDesc(-1);
@@ -229,8 +232,13 @@ export default function PrettyForm() {
                             </div>
                             <div class="flex items-center mb-1">
                                 <input id="checkbox-2" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500" />
-                                <label for="checked-checkbox" class="ms-2 ml-1 text-sm font-medium text-gray-900 ">Schema has context set or has a context field in schema. Click here <a href=''>[Link]</a> for a tutorial on setting a context for your schema</label>
+                                <label for="checked-checkbox" class="ms-2 ml-1 text-sm font-medium text-gray-900">
+                                    Schema has context set or has a context field in schema. Click here {" "}
+                                    <a class=" mx-1 text-blue-500 underline" href='https://hackmd.io/@torchablazed/HJiY6wKIR'>[Link]</a> {" "}
+                                    for a tutorial on setting a context for your schema
+                                </label>
                             </div>
+
                             <div class="flex items-center mb-1">
                                 <input id="checkbox-3" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500" />
                                 <label for="checked-checkbox" class="ms-2 ml-1 text-sm font-medium text-gray-900">Ensure you are the creator of the schema you are attesting</label>
@@ -276,7 +284,7 @@ export default function PrettyForm() {
                                                     required: (<p className="text-sm text-red-800">
                                                         "Please select the network for your Schema"
                                                     </p>),
-                                            
+
                                                 })} className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-black-600 sm:max-w-xs sm:text-sm sm:leading-6">
                                                     <option value="1">Ethereum</option>
                                                     <option value="10">Optimism</option>
