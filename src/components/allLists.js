@@ -5,7 +5,7 @@ import Card from './card';
 import Search from './search';
 
 const apiUrl = "https://attestation-list-api.onrender.com/schema_attestations/0x25eb07102ee3f4f86cd0b0c4393457965b742b8acc94aa3ddbf2bc3f62ed1381";
-const refreshAPIUrl = "https://attestation-list-api.onrender.com/schema_attestations/0x25eb07102ee3f4f86cd0b0c4393457965b742b8acc94aa3ddbf2bc3f62ed1381?refresh=true";
+//const refreshAPIUrl = "https://attestation-list-api.onrender.com/schema_attestations/0x25eb07102ee3f4f86cd0b0c4393457965b742b8acc94aa3ddbf2bc3f62ed1381?refresh=true";
 
 export default function AllLists() {
   const [value, setValue] = useState('');
@@ -22,7 +22,7 @@ export default function AllLists() {
     const fetchAttestations = async () => {
       try {
         const response = await fetch(apiUrl);
-        const refreshresponse = await fetch(refreshAPIUrl);
+       //const refreshresponse = await fetch(refreshAPIUrl);
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
         }
